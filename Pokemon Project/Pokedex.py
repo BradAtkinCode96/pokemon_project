@@ -22,7 +22,7 @@ def pokedex2(pokemon_name):
 
 pokemon = input("What is the id of the pokemon?:" )
 
-pokedex(pokemon)
+pokedex2(pokemon)
 
 # def find_pokemon_by_id(pokedex, pokemon_id):
 #     for pokemon in pokedex:
