@@ -22,7 +22,10 @@ def pokedex2(pokemon_name):
 
 pokemon = input("What is the id of the pokemon?:" )
 
-pokedex2(pokemon)
+if pokemon in pokedex_data["Id"]:
+    pokedex(pokemon)
+else:
+    pokedex2(pokemon)
 
 # def find_pokemon_by_id(pokedex, pokemon_id):
 #     for pokemon in pokedex:
