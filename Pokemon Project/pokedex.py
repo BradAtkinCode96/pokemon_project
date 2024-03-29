@@ -19,34 +19,33 @@ name = mylist[0]["Name"] #How to make this into a function that will be universa
 print(name)
 
 
-# def pokedex_id(pokemon_id):
-#     for pokemon in mylist:
-#         if pokemon['Id'] == str(pokemon_id):
-#             print(pokemon)
+
 def pretty_print(lst):
     print("\n")
     for i in range(len(lst)):
         print(f"{i+1}. {lst[i]}")
 
 def name_search(input):
-    input = input("Enter the name of the pokemon:")
+    user_input = input("Enter the name of the pokemon:")
     result = []
     for item in mylist["Name"]:
         if item in mylist:
-            result.apennd(item)
-
+            result.append(item)
+    return result
 print("Welcome to the pokedex")
 choice = None
 
 while choice != 0:
     try:
         pretty_print(MENU)
-        choice = input("Please make a selection: ")
+        choice = int(input("Please make a selection: "))
         if choice == 1:
             result = name_search(input)
             if len(result) > 0:
                 print("Here are the matches:")
                 print(result)
+            else:
+                print("Nothing matches")
             
     except ValueError:
         print(f"Error, '{choice}' is not a valid option")
