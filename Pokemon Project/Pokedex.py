@@ -22,7 +22,7 @@ def pokedex_name(pokemon_name):
 
 pokemon = input("What is the id of the pokemon?:" )
 
-if pokemon in pokedex_data["Id"]:
+if pokemon == pokedex_data["Id"]:
     pokedex_id(pokemon)
 else:
     pokedex_name(pokemon)
