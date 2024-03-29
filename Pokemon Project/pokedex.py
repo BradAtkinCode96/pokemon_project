@@ -25,13 +25,14 @@ def pretty_print(lst):
     for i in range(len(lst)):
         print(f"{i+1}. {lst[i]}")
 
-def name_search(input):
-    user_input = input("Enter the name of the pokemon:")
+def name_search(): #function takes no arguments
+    user_input = input("Enter the name of the Pokémon: ")  
     result = []
-    for item in mylist["Name"]:
-        if item in mylist:
-            result.append(item)
+    for pokemon in mylist: #searching through the dictionaries
+        if pokemon["Name"].lower() == user_input.lower(): #matching the dictionaries
+            result.append(pokemon) #adding the specified pokemons dictionary. Maybe have to wokr the ressult to find the extra info
     return result
+
 print("Welcome to the pokedex")
 choice = None
 
@@ -40,7 +41,7 @@ while choice != 0:
         pretty_print(MENU)
         choice = int(input("Please make a selection: "))
         if choice == 1:
-            result = name_search(input)
+            result = name_search()
             if len(result) > 0:
                 print("Here are the matches:")
                 print(result)
