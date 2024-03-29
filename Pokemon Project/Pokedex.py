@@ -14,9 +14,9 @@ def pokedex(pokemon_id):
         if pokemon['Id'] == str(pokemon_id):
             print(pokemon)
 
-def pokedex(pokemon_name):
+def pokedex2(pokemon_name):
     for pokemon in pokedex_data:
-        if pokemon("Name") == str(pokemon_name):
+        if pokemon["Name"] == str(pokemon_name): #Trying to find bulbasaur 
             print(pokemon)
 
 
