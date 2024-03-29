@@ -9,12 +9,12 @@ pokedex_data = [
 ]
 
 
-def pokedex(pokemon_id):
+def pokedex_id(pokemon_id):
     for pokemon in pokedex_data:
         if pokemon['Id'] == str(pokemon_id):
             print(pokemon)
 
-def pokedex2(pokemon_name):
+def pokedex_name(pokemon_name):
     for pokemon in pokedex_data:
         if pokemon["Name"] == str(pokemon_name): #Trying to find bulbasaur 
             print(pokemon)
@@ -23,9 +23,9 @@ def pokedex2(pokemon_name):
 pokemon = input("What is the id of the pokemon?:" )
 
 if pokemon in pokedex_data["Id"]:
-    pokedex(pokemon)
+    pokedex_id(pokemon)
 else:
-    pokedex2(pokemon)
+    pokedex_name(pokemon)
 
 # def find_pokemon_by_id(pokedex, pokemon_id):
 #     for pokemon in pokedex:
