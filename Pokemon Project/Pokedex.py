@@ -1,3 +1,9 @@
+# mylist = json.loads("Prettypokedex.json")
+
+#Figured out the length of the list is 3 dictionaries???
+# size = len(mylist)
+# print(size)
+
 import json
 
 mylist = [
@@ -8,14 +14,6 @@ mylist = [
 
 MENU = ["Search by name",
         "search by id",]
-
-
-
-# mylist = json.loads("Prettypokedex.json")
-
-#Figured out the length of the list is 3 dictionaries???
-# size = len(mylist)
-# print(size)
 
 name = mylist[0]["Name"] #How to make this into a function that will be universal (?)
 print(name)
