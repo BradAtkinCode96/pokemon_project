@@ -31,15 +31,16 @@ def pretty_print(lst):
 def name_search(): #function takes no arguments
     user_input = input("Enter the name of the Pokémon: ") 
     #tried making a placehollder dictionary dictp = {} but didnt work
-    for pokemon in mylist: #searching through the dictionaries
+    for pokemon in mylist: #searching through the dictionaries1
         if pokemon["Name"].lower() == user_input.lower(): #matching the dictionaries
-            return 
+            print(pokemon)
+            # return pokemon
             # dictp.update(pokemon) #!!!This doesn"t work because "Update" command just merges dictionaries!!! #adding the specified pokemons dictionary. Maybe have to wokr the ressult to find the extra info
     print("Here are the matches:")
     print(f"Name:", user_input, " :")
     # print(dictp)
-    pp.pprint(dictp)
-    return dictp
+    # pp.pprint(pokemon)
+    # return pokemon
 
 print("Welcome to the pokedex")
 choice = None
@@ -50,11 +51,6 @@ while choice != 0:
         choice = int(input("Please make a selection: "))
         if choice == 1:
             result = name_search()
-            if len(result) > 0:
-                print("Here are the matches:")
-                # print(result)
-            else:
-                print("Nothing matches")
             
     except ValueError:
         print(f"Error, '{choice}' is not a valid option")
