@@ -18,8 +18,8 @@ mylist = [
 MENU = ["Search by name",
         "search by id",]
 
-name = mylist[0]["Name"] #How to make this into a function that will be universal (?)
-print(name)
+# name = mylist[0]["Name"] #How to make this into a function that will be universal (?)
+# print(name)
 
 
 
