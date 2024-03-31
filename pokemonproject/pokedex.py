@@ -29,11 +29,12 @@ def pretty_print(lst):
         print(f"{i+1}. {lst[i]}")
 
 def name_search(): #function takes no arguments
-    user_input = input("Enter the name of the Pokémon: ")  
-    dictp = {}
+    user_input = input("Enter the name of the Pokémon: ") 
+    #tried making a placehollder dictionary dictp = {} but didnt work
     for pokemon in mylist: #searching through the dictionaries
         if pokemon["Name"].lower() == user_input.lower(): #matching the dictionaries
-            dictp.update(pokemon) #adding the specified pokemons dictionary. Maybe have to wokr the ressult to find the extra info
+            return 
+            # dictp.update(pokemon) #!!!This doesn"t work because "Update" command just merges dictionaries!!! #adding the specified pokemons dictionary. Maybe have to wokr the ressult to find the extra info
     print("Here are the matches:")
     print(f"Name:", user_input, " :")
     # print(dictp)
