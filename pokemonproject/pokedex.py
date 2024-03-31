@@ -3,6 +3,9 @@
 #Figured out the length of the list is 3 dictionaries???
 # size = len(mylist)
 # print(size)
+import pprint #-> this does work!
+pp = pprint.PrettyPrinter(indent=0)  #read the documentation for pretty print extension
+# pp.pprint(dictp)
 
 import json
 
@@ -30,9 +33,11 @@ def name_search(): #function takes no arguments
     dictp = {}
     for pokemon in mylist: #searching through the dictionaries
         if pokemon["Name"].lower() == user_input.lower(): #matching the dictionaries
-            dictp.append(pokemon) #adding the specified pokemons dictionary. Maybe have to wokr the ressult to find the extra info
-    for item in dictp:
-        print(item)
+            dictp.update(pokemon) #adding the specified pokemons dictionary. Maybe have to wokr the ressult to find the extra info
+    print("Here are the matches:")
+    print(f"Name:", user_input, " :")
+    # print(dictp)
+    pp.pprint(dictp)
     return dictp
 
 print("Welcome to the pokedex")
@@ -46,7 +51,7 @@ while choice != 0:
             result = name_search()
             if len(result) > 0:
                 print("Here are the matches:")
-                print(result)
+                # print(result)
             else:
                 print("Nothing matches")
             
