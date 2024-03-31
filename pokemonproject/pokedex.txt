@@ -1,3 +1,4 @@
 Search for a pokemon by number or name, including partial match and display all information about it in a human readable form
-Construct a team of 6 pokemon, each of which has 4 active moves, out of the ones available. After the team has been chosen, it will be output into a similarly formatted JSON file, with only the active moves included
+Construct a team of 6 pokemon, each of which has 4 active moves, out of the ones available. After the team has been chosen, it will be output into a similarly formatted JSON file,
+ with only the active moves included
 Filter the JSON by any combination of: type, speed range, height range, weight range, HP range and output the result into a JSON file

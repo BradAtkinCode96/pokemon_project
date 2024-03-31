@@ -31,8 +31,8 @@ def pretty_print(lst):
 def name_search(): #function takes no arguments
     user_input = input("Enter the name of the Pokémon: ") 
     #tried making a placehollder dictionary dictp = {} but didnt work
-    for pokemon in mylist: #searching through the dictionaries1
-        if pokemon["Name"].lower() == user_input.lower(): #matching the dictionaries
+    for pokemon in mylist: #searching through the list of dictionaries1
+        if pokemon["Name"].lower() == user_input.lower(): #matching the correct dictionaries
             print(pokemon)
             # return pokemon
             # dictp.update(pokemon) #!!!This doesn"t work because "Update" command just merges dictionaries!!! #adding the specified pokemons dictionary. Maybe have to wokr the ressult to find the extra info
