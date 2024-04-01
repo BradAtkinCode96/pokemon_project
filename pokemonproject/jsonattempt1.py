@@ -43,8 +43,7 @@ def filter_rng():
     filtered_pokemon = []
     for pokemon in mylist: 
         if min_val <= pokemon[""] <= max_val:
-            mylist.append(pokemon)
-            
+            mylist.append(pokemon)       
     pretty_print(filtered_pokemon)
 
 # def filter_rang():
@@ -67,7 +66,8 @@ while choice != 0:
         if choice == 2:
             pass
         if choice == 3: 
-            filter_opt = input(printkeys())
-            filter()
+            filter_opt = input(f"What do you want to filter by?", printkeys())
+            # if 
+            
     except ValueError:
         print(f"Error, '{choice}' is not a valid option")
