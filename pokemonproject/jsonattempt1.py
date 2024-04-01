@@ -58,30 +58,39 @@ def id_search():
             id_out.append(pokemon)
 
 def filter_type(): #i have the filter for the list but don't know how to not hardcode the choice of the category to filter by
-    #input
-    user_input = input("Enter the type of the Pokémon: ")\
-    
+    user_input = input("Enter the type of the Pokémon: ")    
     filterlist = []
     for pokemon in mylist: 
         if pokemon["Type 1"].lower() == user_input.lower():
             filterlist.append(pokemon)
+
 def speed_range():
     min_val = int(input("Enter the minimum value of the speed: "))
     max_val = int(input("Enter the maximum value of the speed: "))
     filtered_pokemon = []
     for pokemon in mylist: 
-        if min_val <= pokemon[""] <= max_val:
+        if min_val <= pokemon["Speed"] <= max_val:
             filtered_pokemon.append(pokemon)       
     pretty_print(filtered_pokemon)
 
-def weight_range():
+def weight_rangelb():
     min_val = int(input("Enter the minimum value of the weight: "))
     max_val = int(input("Enter the maximum value of the weight: "))
     filtered_pokemon = []
     for pokemon in mylist: 
-        if min_val <= pokemon[""] <= max_val:
+        if min_val <= pokemon["Weight (lbs)"] <= max_val:
             filtered_pokemon.append(pokemon)       
     pretty_print(filtered_pokemon)
+
+def weight_rangekg():
+    min_val = int(input("Enter the minimum value of the weight: "))
+    max_val = int(input("Enter the maximum value of the weight: "))
+    filtered_pokemon = []
+    for pokemon in mylist: 
+        if min_val <= pokemon["Weight (kg)"] <= max_val:
+            filtered_pokemon.append(pokemon)       
+    pretty_print(filtered_pokemon)
+
 
 print("Welcome to the pokedex")
 choice = None
@@ -94,9 +103,16 @@ while choice != 0:
             result = name_search()
         if choice == 2: #ID SEARCH
             id_search()
-        if choice == 3: #FILTER
-            filter_opt = input("What do type you want to filter by?")
-        if choice == 4 #weight range
+        if choice == 3: #Type 1 FILTER
+            filter_by_type()
+        if choice == 4: #Type 2 Filter
+            filter_by_type()
+        if choice == 5:
+            speed_range()
+        if choice == 6:
+            weight_range()
+        if choice == 7:
+            
             
             
     except ValueError:

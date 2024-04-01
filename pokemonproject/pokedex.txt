@@ -18,6 +18,7 @@ print(basic_high_usage)
         "Search by Id",
         "Filter by Type 1",
         "Filter By Type 2",
-        "Filter by Speed Range",
-        "Filter by Weight Range",
-        "Filter by HP Range"
+        "Filter by Speed Range", Speed
+        "Filter by Weight Range",Weight (lbs) Weight (kg)
+        Height (m) Height (ft)
+        "Filter by HP Range" HP
