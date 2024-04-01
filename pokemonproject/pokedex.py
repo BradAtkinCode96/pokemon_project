@@ -17,7 +17,7 @@ MENU = ["Search by name",
 def pretty_print(lst):
     print("\n")
     for i in range(len(lst)):
-        print(f"{i+1}. {lst[i]}")
+        print(f"{i+1}. {lst[i]}\n")
 
 
 
@@ -27,7 +27,8 @@ def name_search():
         if pokemon["Name"].lower() == user_input.lower(): 
             return pokemon
     print("Here are the matches:")
-    print(f"Name:", user_input, " :")
+    print(f"Name:", user_input, ":")
+    
     # print(dictp)
     # pp.pprint(pokemon)
     # return pokemon
