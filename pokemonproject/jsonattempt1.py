@@ -143,7 +143,6 @@ while choice != 0:
             result = name_search()
         elif choice == 2: #ID SEARCH
             id_search()
-            
         elif choice == 3: #Type 1 FILTER
             filter_by_type()
         elif choice == 4: #Type 2 Filter
