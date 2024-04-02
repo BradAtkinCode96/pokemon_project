@@ -10,8 +10,18 @@ MENU = ["Search by Name",
         "Filter by Type 2",
         "Filter by Speed Range",
         "Filter by Weight Range",
+        "Filter by Height Range",
         "Filter by HP Range"]
 
+SUBMENU = ["Would you like to filter further?",
+           "Filter by Type 1",
+           "Filter by Type 2",
+           "Filter by Speed Range",
+           "Filter by Weight Range",
+           "Filter by Height Range",
+           "Filter by HP Range",
+           "Your choice"
+            ]
 FILTERMENU = ["Filter by Type 1",
               "Filter by Type 2",
               "Filter by Speed Range",
@@ -102,13 +112,24 @@ def speed_range():
     except ValueError:
         print("Is that a valid input?")
 
+def error_prevent(min_val, max_val):
+    try:
+        min_val = float(min_val)
+        max_val = float(max_val)
+    except TypeError:
+        print("You need to enter a number there")
+
+
+
 
 def weight_range(min_val, max_val, unit):
     filtered_pokemon = []
-    for pokemon in mylist: 
+    for pokemon in mylist:
         if min_val <= pokemon[f"{unit}"] <= max_val:
-            filtered_pokemon.append(pokemon["Name"])       
+            filtered_pokemon.append(pokemon["Name"])
+    print("These are the matches:")       
     pretty_print(filtered_pokemon)
+    return filtered_pokemon
 
 def height_range(min_val, max_val, unit):
     try:
@@ -132,6 +153,7 @@ def HP_range():
     except ValueError:
         print("Please input an interger: ")
 
+
 print("Welcome to the pokedex")
 choice = None
 
@@ -152,12 +174,11 @@ while choice != 0:
         elif choice == 6: #weight
             pretty_print(WEIGHTMENU)
             selection = input("Filter by meters or f?\n"
-                              "1: meters\n"
-                              "2. feet:\n"
+                              "1: Weight (kg)\n"
+                              "2. Weight (lbs)\n"
                               "Your choice: \n")
-            selection == int(selection)
             try:
-                selection == int(selection)
+                selection == float(selection)
                 if selection == 1:
                     unit = "Weight (kg)"
                     min_val = input("MIN WEIGHT (kg): ")
@@ -170,13 +191,13 @@ while choice != 0:
                     weight_range(min_val, max_val, unit)
             except ValueError:
                 print("Please make a valid selection")
-        elif choice == 7:
+        elif choice == 7: #height
             selection = input("Filter by meters or f?\n"
                               "1: meters\n"
                               "2. feet:\n"
                               "Your choice: \n")
             try:
-                selection == int(selection)
+                selection = int(selection)
                 if selection == 1:
                     unit = "Height (m)"
                     min_val = input("MIN HEIGHT (m): ")
