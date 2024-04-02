@@ -70,7 +70,7 @@ def name_search():
             matches.append(pokemon["Name"])
     print(matches)
 
-def filter_range(attribute_name, unit):
+def filter_range(attribute_name, unit): #when calling, atribute 
     min_val = input(f"Enter the minimum {attribute_name}: ") #f and curly brackets lets me print the interchagable variable
     max_val = input(f"Enter the maximum {attribute_name}: ")
     try:
