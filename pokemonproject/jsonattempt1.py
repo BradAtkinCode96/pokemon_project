@@ -76,11 +76,12 @@ def name_search():
             print(pokemon)
 
 def id_search(): 
-    user_input = input("Enter the name of the Pokémon: ")
+    user_input = input("Enter the id of the Pokémon: ")
     id_out = [] 
     for pokemon in mylist: 
-        if pokemon["Id"].lower() == user_input.lower():
+        if pokemon["Id"] == user_input:
             id_out.append(pokemon)
+    pretty_print(id_out)
 
 def filter_type(): #i have the filter for the list but don't know how to not hardcode the choice of the category to filter by
     user_input = input("Enter the type of the Pokémon: ")    
@@ -142,6 +143,7 @@ while choice != 0:
             result = name_search()
         elif choice == 2: #ID SEARCH
             id_search()
+            
         elif choice == 3: #Type 1 FILTER
             filter_by_type()
         elif choice == 4: #Type 2 Filter
