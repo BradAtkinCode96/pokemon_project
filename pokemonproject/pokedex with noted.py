@@ -1,7 +1,11 @@
+# mylist = json.loads("Prettypokedex.json")
 
+#Figured out the length of the list is 3 dictionaries???
+# size = len(mylist)
+# print(size)
 import pprint #-> this does work!
 pp = pprint.PrettyPrinter(indent=0)  #read the documentation for pretty print extension
-
+# pp.pprint(dictp)
 
 import json
 
@@ -14,33 +18,29 @@ mylist = [
 MENU = ["Search by name",
         "search by id",]
 
+# name = mylist[0]["Name"] #How to make this into a function that will be universal (?)
+# print(name)
+
+
+
 def pretty_print(lst):
     print("\n")
     for i in range(len(lst)):
-        print(f"{i+1}. {lst[i]}\n")
+        print(f"{i+1}. {lst[i]}")
 
-def id_search(): 
-    user_input = input("Enter the ID of the Pokémon: ") 
-    for pokeid in mylist: 
-        if pokeid["Id"].lower() == user_input.lower():
-            pp.print(pokeid)
-        else: 
-            print("Not found. Please try again. ")
-
-
-def name_search(): 
+def name_search(): #function takes no arguments
     user_input = input("Enter the name of the Pokémon: ") 
-    for pokemon in mylist: 
-        if pokemon["Name"].lower() == user_input.lower(): 
-            pp.pprint(pokemon)
+    #tried making a placehollder dictionary dictp = {} but didnt work
+    for pokemon in mylist: #searching through the list of dictionaries1
+        if pokemon["Name"].lower() == user_input.lower(): #matching the correct dictionaries
+            print(pokemon)
             # return pokemon
+            # dictp.update(pokemon) #!!!This doesn"t work because "Update" command just merges dictionaries!!! #adding the specified pokemons dictionary. Maybe have to wokr the ressult to find the extra info
     print("Here are the matches:")
-    print(f"Name:", user_input, ":")
-    pp.pprint(pokemon)
+    print(f"Name:", user_input, " :")
+    # print(dictp)
+    # pp.pprint(pokemon)
     # return pokemon
-
-# def add_to_team():
-
 
 print("Welcome to the pokedex")
 choice = None
@@ -51,9 +51,38 @@ while choice != 0:
         choice = int(input("Please make a selection: "))
         if choice == 1:
             result = name_search()
-        elif choice == 2:
-            result = id_search()
             
     except ValueError:
         print(f"Error, '{choice}' is not a valid option")
 
+
+
+
+
+
+# for item in mylist:
+#     print(item)
+
+# def pokedex_id(pokemon_id):
+#     for pokemon in mylist:
+#         if pokemon['Id'] == str(pokemon_id):
+#             print(pokemon)
+
+# def pokedex_name(pokemon_name):
+#     for pokemon in mylist:
+#         if pokemon["Name"] == str(pokemon_name): #Trying to find bulbasaur 
+#             print(pokemon)
+
+
+pokemon = input("What is the id of the pokemon?:" )
+
+
+# def find_pokemon_by_id(pokedex, pokemon_id):
+#     for pokemon in pokedex:
+#         if pokemon["Name"] == pokemon_id:
+#             return pokemon
+#     return None
+
+# print(pokedex[1])
+# pokemon_id = input("search term")
+# print(pokemon)

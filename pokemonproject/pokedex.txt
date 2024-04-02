@@ -2,3 +2,23 @@ Search for a pokemon by number or name, including partial match and display all 
 Construct a team of 6 pokemon, each of which has 4 active moves, out of the ones available. After the team has been chosen, it will be output into a similarly formatted JSON file,
  with only the active moves included
 Filter the JSON by any combination of: type, speed range, height range, weight range, HP range and output the result into a JSON file
+
+
+type, speed range, height range, weight range, HP range
+
+height_range = []
+threshold = input
+for user in users_data:
+    if user["plan_type"] == "basic" and user["data_usage"] > threshold:
+        basic_high_usage.append(user)
+print(basic_high_usage)
+
+
+"Search by Name",
+        "Search by Id",
+        "Filter by Type 1",
+        "Filter By Type 2",
+        "Filter by Speed Range", Speed
+        "Filter by Weight Range",Weight (lbs) Weight (kg)
+        Height (m) Height (ft)
+        "Filter by HP Range" HP
