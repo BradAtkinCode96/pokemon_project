@@ -69,13 +69,15 @@ def filter_by_type(type_to_filter):
             print("valid selection please")
     pretty_print(filtered_pokemon)
 
+
 def name_search(): 
     user_input = input("Enter the name of the Pokémon: ")
     matches = [] 
     for pokemon in mylist: 
         if  user_input.lower() in pokemon["Name"].lower():
             matches.append(pokemon)
-    print(pokemon)
+    print(matches)
+    return matches
 
 def id_search(): 
     user_input = input("Enter the ID of the Pokémon: ")
@@ -83,7 +85,8 @@ def id_search():
     for pokemon in mylist: 
         if pokemon["Id"] == user_input:
             id_out.append(pokemon)
-    print(pokemon["Name"])
+    print(id_out)
+    return id_out
 
 def filter_type(): #i have the filter for the list but don't know how to not hardcode the choice of the category to filter by
     user_input = input("Enter the type of the Pokémon: ")    
@@ -91,6 +94,7 @@ def filter_type(): #i have the filter for the list but don't know how to not har
     for pokemon in mylist: 
         if pokemon["Type 1"].lower() == user_input.lower():
             filterlist.append(pokemon)
+    return filterlist
 
 def speed_range():
     try:
@@ -142,7 +146,7 @@ while choice != 0:
         pretty_print(MENU)
         choice = int(input("Please make a selection: "))
         if choice == 1: #NAME SEARCH
-            result = name_search()
+            rmatches = name_search()
         elif choice == 2: #ID SEARCH
             id_search()
         elif choice == 3: #Type 1 FILTER
