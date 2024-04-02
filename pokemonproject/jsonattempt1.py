@@ -81,16 +81,18 @@ def filter_by_type(type_to_filter):
 
 def name_search(): 
     user_input = input("Enter the name of the Pokémon: ") 
+    matches = []
     for pokemon in mylist: 
-        if pokemon["Name"].lower() == user_input.lower():
-            print(pokemon)
+        if user_input.lower() in pokemon["Name"].lower():
+            matches.append(pokemon["Name"])
+    print(matches)
 
 def id_search(): 
     user_input = input("Enter the id of the Pokémon: ")
     id_out = [] 
     for pokemon in mylist: 
         if pokemon["Id"] == user_input:
-            id_out.append(pokemon)
+            id_out.append(pokemon["Name"])
     pretty_print(id_out)
 
 def filter_type(): #i have the filter for the list but don't know how to not hardcode the choice of the category to filter by
@@ -173,10 +175,7 @@ while choice != 0:
             speed_range()
         elif choice == 6: #weight
             pretty_print(WEIGHTMENU)
-            selection = input("Filter by meters or f?\n"
-                              "1: Weight (kg)\n"
-                              "2. Weight (lbs)\n"
-                              "Your choice: \n")
+            selection = input("Your choice: \n")
             try:
                 selection == float(selection)
                 if selection == 1:
@@ -192,12 +191,10 @@ while choice != 0:
             except ValueError:
                 print("Please make a valid selection")
         elif choice == 7: #height
-            selection = input("Filter by meters or f?\n"
-                              "1: meters\n"
-                              "2. feet:\n"
-                              "Your choice: \n")
+            print(HEIGHTMENU)
+            selection = input("Your choice: \n")
             try:
-                selection = int(selection)
+                selection = float(selection)
                 if selection == 1:
                     unit = "Height (m)"
                     min_val = input("MIN HEIGHT (m): ")
