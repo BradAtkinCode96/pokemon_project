@@ -151,7 +151,11 @@ while choice != 0:
             speed_range()
         elif choice == 6: #weight
             pretty_print(WEIGHTMENU)
-            selection = input("Filter by Kg or lbs?: ")
+            selection = input("Filter by meters or f?\n"
+                              "1: meters\n"
+                              "2. feet:\n"
+                              "Your choice: \n")
+            selection == int(selection)
             try:
                 selection == int(selection)
                 if selection == 1:
@@ -167,7 +171,10 @@ while choice != 0:
             except ValueError:
                 print("Please make a valid selection")
         elif choice == 7:
-            selection = input("Filter by meters or f?: ")
+            selection = input("Filter by meters or f?\n"
+                              "1: meters\n"
+                              "2. feet:\n"
+                              "Your choice: \n")
             try:
                 selection == int(selection)
                 if selection == 1:
