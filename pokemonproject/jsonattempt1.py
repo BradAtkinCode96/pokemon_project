@@ -106,7 +106,7 @@ def weight_range(min_val, max_val, unit):
     filtered_pokemon = []
     for pokemon in mylist: 
         if min_val <= pokemon[f"{unit}"] <= max_val:
-            filtered_pokemon.append(pokemon)       
+            filtered_pokemon.append(pokemon["Name"])       
     pretty_print(filtered_pokemon)
 
 def height_range(min_val, max_val, unit):
@@ -114,19 +114,22 @@ def height_range(min_val, max_val, unit):
         filtered_pokemon = []
         for pokemon in mylist: 
             if min_val <= pokemon[f"{unit}"] <= max_val:
-                filtered_pokemon.append(pokemon)       
+                filtered_pokemon.append(pokemon["Name"])       
         pretty_print(filtered_pokemon)
     except ValueError:
         print("That is not valid input. Please try again")
 
 def HP_range():
-    min_val = int(input("Enter the minimum height (ft): "))
-    max_val = int(input("Enter the maximum height (ft): "))
-    filtered_pokemon = []
-    for pokemon in mylist: 
-        if min_val <= pokemon["HP"] <= max_val:
-            filtered_pokemon.append(pokemon)       
-    pretty_print(filtered_pokemon)
+    try:
+        min_val = int(input("Enter the minimum HP: "))
+        max_val = int(input("Enter the maximum HP: "))
+        filtered_pokemon = []
+        for pokemon in mylist: 
+            if min_val <= pokemon["HP"] <= max_val:
+                filtered_pokemon.append(pokemon["Name"])       
+        pretty_print(filtered_pokemon)
+    except ValueError:
+        print("Please input an interger: ")
 
 print("Welcome to the pokedex")
 choice = None
