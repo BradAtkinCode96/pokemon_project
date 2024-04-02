@@ -70,17 +70,20 @@ def filter_by_type(type_to_filter):
     pretty_print(filtered_pokemon)
 
 def name_search(): 
-    user_input = input("Enter the name of the Pokémon: ") 
+    user_input = input("Enter the name of the Pokémon: ")
+    matches = [] 
     for pokemon in mylist: 
-        if pokemon["Name"].lower() == user_input.lower():
-            print(pokemon)
+        if  user_input.lower() in pokemon["Name"].lower():
+            matches.append(pokemon)
+    print(pokemon)
 
 def id_search(): 
-    user_input = input("Enter the name of the Pokémon: ")
+    user_input = input("Enter the ID of the Pokémon: ")
     id_out = [] 
     for pokemon in mylist: 
-        if pokemon["Id"].lower() == user_input.lower():
+        if pokemon["Id"] == user_input:
             id_out.append(pokemon)
+    print(pokemon["Name"])
 
 def filter_type(): #i have the filter for the list but don't know how to not hardcode the choice of the category to filter by
     user_input = input("Enter the type of the Pokémon: ")    
