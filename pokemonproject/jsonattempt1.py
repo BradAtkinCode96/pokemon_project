@@ -22,24 +22,7 @@ SUBMENU = ["Would you like to filter further?",
            "Filter by HP Range",
            "Your choice"
             ]
-FILTERMENU = ["Filter by Type 1",
-              "Filter by Type 2",
-              "Filter by Speed Range",
-              "Filter by Weight Range",
-              "Filter by HP Range",
-            ]
-
-TYPEMENU = ["Filter by Type 1",
-            "Filter By Type 2",
-            ]
-
-HEIGHTMENU = ["Filter by meters",
-              "Filter by feet",
-              ]
-
-WEIGHTMENU = ["Filter by kg",
-              "Filter by pounds",
-              ]
+def 
 
 def pretty_print(lst):
     print("\n")
@@ -87,6 +70,18 @@ def name_search():
             matches.append(pokemon["Name"])
     print(matches)
 
+def filter_range(attribute_name, unit):
+    min_val = input(f"Enter the minimum {attribute_name}: ") #f and curly brackets lets me print the interchagable variable
+    max_val = input(f"Enter the maximum {attribute_name}: ")
+    try:
+        filtered_pokemon = []
+        min_val = float(min_val)
+        max_val = float(max_val)
+        for pokemon in mylist: 
+            if min_val <= int(pokemon[unit]) <= max_val:
+                filtered_pokemon.append(pokemon) 
+    except ValueError:
+        print("Must be an integer")
 def id_search(): 
     user_input = input("Enter the id of the Pokémon: ")
     id_out = [] 
@@ -174,7 +169,6 @@ while choice != 0:
         elif choice == 5: #speed
             speed_range()
         elif choice == 6: #weight
-            pretty_print(WEIGHTMENU)
             selection = input("Your choice: \n")
             try:
                 selection == float(selection)
