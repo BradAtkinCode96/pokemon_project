@@ -7,10 +7,29 @@ with open(r"C:\Users\Bradl\Documents\GitHub\PokemonProject\pokemonproject\shrtpo
 MENU = ["Search by Name",
         "Search by Id",
         "Filter by Type 1",
-        "Filter By Type 2",
+        "Filter by Type 2",
         "Filter by Speed Range",
         "Filter by Weight Range",
         "Filter by HP Range"]
+
+FILTERMENU = ["Filter by Type 1",
+              "Filter by Type 2",
+              "Filter by Speed Range",
+              "Filter by Weight Range",
+              "Filter by HP Range",
+            ]
+
+TYPEMENU = ["Filter by Type 1",
+            "Filter By Type 2",
+            ]
+
+HEIGHTMENU = ["Filter by meters",
+              "Filter by feet",
+              ]
+
+WEIGHTMENU = ["Filter by kg",
+              "Filter by pounds",
+              ]
 
 def pretty_print(lst):
     print("\n")
@@ -18,6 +37,14 @@ def pretty_print(lst):
         print(f"{i+1}. {lst[i]}")
 
 def printkeys():
+    all_keys = []
+    for pokemon in mylist:
+        for key in pokemon.keys():
+            if key not in all_keys:
+                all_keys.append(key)
+    pretty_print(all_keys)
+
+def printKeysLeft():
     all_keys = []
     for pokemon in mylist:
         for key in pokemon.keys():
@@ -63,47 +90,34 @@ def filter_type(): #i have the filter for the list but don't know how to not har
             filterlist.append(pokemon)
 
 def speed_range():
-    min_val = int(input("Enter the minimum speed: "))
-    max_val = int(input("Enter the maximum speed: "))
-    filtered_pokemon = []
-    for pokemon in mylist: 
-        if min_val <= int(pokemon["Speed"]) <= max_val:
-            filtered_pokemon.append(pokemon)       
-    pretty_print(filtered_pokemon.get("Speed"))
+    try:
+        min_val = int(input("Enter the minimum speed: "))
+        max_val = int(input("Enter the maximum speed: "))
+        filtered_pokemon = []
+        for pokemon in mylist: 
+            if min_val <= int(pokemon["Speed"]) <= max_val:
+                filtered_pokemon.append(pokemon)       
+        pretty_print(filtered_pokemon.get("Speed"))
+    except ValueError:
+        print("Is that a valid input?")
 
-def weight_rangelb():
-    min_val = int(input("Enter the minimum weight (lbs): "))
-    max_val = int(input("Enter the maximum weight (lbs): "))
-    filtered_pokemon = []
-    for pokemon in mylist: 
-        if min_val <= pokemon["Weight (lbs)"] <= max_val:
-            filtered_pokemon.append(pokemon)       
-    pretty_print(filtered_pokemon)
 
-def weight_rangekg(min_val, max_val, unit):
+def weight_range(min_val, max_val, unit):
     filtered_pokemon = []
     for pokemon in mylist: 
         if min_val <= pokemon[f"{unit}"] <= max_val:
             filtered_pokemon.append(pokemon)       
     pretty_print(filtered_pokemon)
 
-def height_rangem():
-    min_val = int(input("Enter the minimum height (m): "))
-    max_val = int(input("Enter the maximum height (m): "))
-    filtered_pokemon = []
-    for pokemon in mylist: 
-        if min_val <= pokemon["Height (m)"] <= max_val:
-            filtered_pokemon.append(pokemon)       
-    pretty_print(filtered_pokemon)
-
-def height_rangeft():
-    min_val = int(input("Enter the minimum height (ft): "))
-    max_val = int(input("Enter the maximum height (ft): "))
-    filtered_pokemon = []
-    for pokemon in mylist: 
-        if min_val <= pokemon["Height (ft)"] <= max_val: # pokemon(f"{}")
-            filtered_pokemon.append(pokemon)       
-    pretty_print(filtered_pokemon)
+def height_range(min_val, max_val, unit):
+    try:
+        filtered_pokemon = []
+        for pokemon in mylist: 
+            if min_val <= pokemon[f"{unit}"] <= max_val:
+                filtered_pokemon.append(pokemon)       
+        pretty_print(filtered_pokemon)
+    except ValueError:
+        print("That is not valid input. Please try again")
 
 def HP_range():
     min_val = int(input("Enter the minimum height (ft): "))
@@ -132,17 +146,38 @@ while choice != 0:
         elif choice == 5: #speed
             speed_range()
         elif choice == 6: #weight
-            selection = input("What do you want to filter by?\n"
-                            "1. Weight (lbs)"
-                            "2. Weight (kg)"
-                            "Your selection: ")
-            selection = int(selection)
-            if selection == 1:
-                weight_rangelb()
-            if selection == 2:
-                weight_rangekg()
+            pretty_print(WEIGHTMENU)
+            selection = input("Filter by Kg or lbs?: ")
+            try:
+                selection == int(selection)
+                if selection == 1:
+                    unit = "Weight (kg)"
+                    min_val = input("MIN WEIGHT (kg): ")
+                    max_val = input("MAX WEIGHT (kg): ")
+                    weight_range(min_val, max_val, unit)
+                if selection == 2:
+                    unit = "Weight (lbs)"
+                    min_val = input("MIN WEIGHT (lbs): ")
+                    max_val = input("MAX WEIGHT (lbs): ")
+                    weight_range(min_val, max_val, unit)
+            except ValueError:
+                print("Please make a valid selection")
         elif choice == 7:
-            HP_range()
+            selection = input("Filter by meters or f?: ")
+            try:
+                selection == int(selection)
+                if selection == 1:
+                    unit = "Height (m)"
+                    min_val = input("MIN HEIGHT (m): ")
+                    max_val = input("MAX HEIGHT (m): ")
+                    weight_range(min_val, max_val, unit)
+                if selection == 2:
+                    unit = "Height (ft)"
+                    min_val = input("MIN HEIGHT (ft): ")
+                    max_val = input("MAX HEIGHT (ft): ")
+                    weight_range(min_val, max_val, unit)
+            except ValueError:
+                print("not a valid selection")
         elif choice == 8:
             print("Exiting...")    
             break     
