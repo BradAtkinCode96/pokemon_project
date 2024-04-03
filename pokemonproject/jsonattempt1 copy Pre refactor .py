@@ -69,7 +69,7 @@ def name_search():
             matches.append(pokemon["Name"])
     print(matches)
 
-def filter_range(attribute_name, unit): #when calling, atribute and unit should be in quptes as they are strings
+def filter_range(attribute_name, unit): #when calling, atribute 
     min_val = input(f"Enter the minimum {attribute_name}: ") #f and curly brackets lets me print the interchagable variable
     max_val = input(f"Enter the maximum {attribute_name}: ")
     try:
@@ -78,8 +78,7 @@ def filter_range(attribute_name, unit): #when calling, atribute and unit should 
         max_val = float(max_val)
         for pokemon in mylist: 
             if min_val <= int(pokemon[unit]) <= max_val:
-                filtered_pokemon.append(pokemon)
-        pretty_print(filtered_pokemon)
+                filtered_pokemon.append(pokemon) 
     except ValueError:
         print("Must be an integer")
 def id_search(): 
@@ -185,6 +184,7 @@ while choice != 0:
             except ValueError:
                 print("Please make a valid selection")
         elif choice == 7: #height
+            print(HEIGHTMENU) #was gonna do this but then found the refactored way
             selection = input("Your choice: \n")
             try:
                 selection = float(selection)
