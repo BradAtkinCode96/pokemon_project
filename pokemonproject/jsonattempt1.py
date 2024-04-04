@@ -32,9 +32,16 @@ def valid_types():
         values.append(pokemon["Type 1"]) and values.append(pokemon["Type 2"])
     pretty_print(values)
 
+def id_search(): 
+    user_input = input("Enter the id of the Pokémon: ")
+    id_out = [] 
+    for pokemon in mylist: 
+        if pokemon["Id"] == user_input:
+            id_out.append(pokemon["Name"])
+    pretty_print(id_out)
+
 def filter_by_type(type_to_filter):
     filtered_pokemon = []
-    # print("valid types: " )
     for pokemon in mylist:
         try:
             if pokemon["Type 1"].lower() == type_to_filter.lower() or pokemon["Type 2"].lower() == type_to_filter.lower():
@@ -59,35 +66,11 @@ def filter_range(attribute_name, unit): #when calling, atribute and unit should 
         min_val = int(min_val)
         max_val = int(max_val)
         for pokemon in mylist: 
-            if min_val <= int(pokemon["{unit}"]) <= max_val:
+            if min_val <= int(pokemon[unit]) <= max_val:
                 filtered_pokemon.append(pokemon["Name"])
         pretty_print(filtered_pokemon)
     except ValueError:
         print("Must be an integer")
-
-def id_search(): 
-    user_input = input("Enter the id of the Pokémon: ")
-    id_out = [] 
-    for pokemon in mylist: 
-        if pokemon["Id"] == user_input:
-            id_out.append(pokemon["Name"])
-    pretty_print(id_out)
-
-def filter_choice(attribute_name, unit1, unit2): #refactored to get any values
-    choice = input(f"What do you want to filter {attribute_name} by?\n"
-                   f"1. Filter by {unit1}\n"
-                   f"2. Filter by {unit2}\n"
-                   "Your choice: \n")
-    try:
-        choice = int(choice)
-        if choice == 1:
-            filter_range(f"{attribute_name}",f"{unit1}")
-            # return 1
-        elif choice == 2:
-            filter_range(f"{attribute_name}",f"{unit2}")
-            # return 2
-    except ValueError:
-        print("Choice must be a number")
 
 print("Welcome to the pokedex")
 choice = None
@@ -101,27 +84,38 @@ while choice != 0:
         elif choice == 2: #ID SEARCH
             id_search()
         elif choice == 3: #TypE Filter
-            user_input = input("What type do you want to filter?: ")
+            user_input = input("What type do you want to filter by?: ")
             filter_by_type(user_input)
         elif choice == 4: #speed
             filter_range("speed", "Speed")
         elif choice == 5: #weight
-                        # selection = input("Search by:\n"
-            #       "1. Type 1\n"
-            #       "2. Type 2\n"
-            #       "Your choice: 2")
-            # try: 
-            #     selection = int(selection)
-            #     if selection == 1:
-
-            #     if selection == 2:
-            # except ValueError:
-            #     print("You must select a number")
-            
-
+            while choice == 5:
+                selection = input("Search by:\n"
+                                "1. Kilograms\n"
+                                "2. Pounds\n"
+                                "Your choice: ")
+                try: 
+                    selection = int(selection)
+                    if selection == 1:
+                        filter_range("Weight", "Weight (kg)")
+                    if selection == 2:
+                        filter_range("Weight", "Weight (lbs)")
+                except ValueError:
+                    print("You must select a number")
         elif choice == 6: #height
-
-        elif choice == 7: #height
+            selection = input("Search by:\n"
+                              "1. Meters\n"
+                              "2. feet\n"
+                              "Your choice: ")
+            try: 
+                selection = int(selection)
+                if selection == 1:
+                    filter_range("Height", "Height (m)")
+                if selection == 2:
+                    filter_range("Height", "Weight (ft)")
+            except ValueError:
+                print("You must select a number")
+        elif choice == 7: #HP
             filter_range("HP", "HP")
         elif choice == 8:
             print("Exiting...")    
