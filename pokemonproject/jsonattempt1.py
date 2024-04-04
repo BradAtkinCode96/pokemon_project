@@ -6,16 +6,14 @@ with open(r"C:\Users\Bradl\Documents\GitHub\PokemonProject\pokemonproject\shrtpo
 
 MENU = ["Search by Name",
         "Search by Id",
-        "Filter by Type 1",
-        "Filter by Type 2",
+        "Filter by Type",
         "Filter by Speed Range",
         "Filter by Weight Range",
         "Filter by Height Range",
         "Filter by HP Range"]
 
 SUBMENU = ["Would you like to filter further?",
-           "Filter by Type 1",
-           "Filter by Type 2",
+           "Filter by Type",
            "Filter by Speed Range",
            "Filter by Weight Range",
            "Filter by Height Range",
@@ -52,7 +50,7 @@ def valid_types():
 
 def filter_by_type(type_to_filter):
     filtered_pokemon = []
-    print("valid types: " )
+    # print("valid types: " )
     for pokemon in mylist:
         try:
             if pokemon["Type 1"].lower() == type_to_filter.lower() or pokemon["Type 2"].lower() == type_to_filter.lower():
@@ -82,6 +80,7 @@ def filter_range(attribute_name, unit): #when calling, atribute and unit should 
         pretty_print(filtered_pokemon)
     except ValueError:
         print("Must be an integer")
+
 def id_search(): 
     user_input = input("Enter the id of the Pokémon: ")
     id_out = [] 
@@ -125,7 +124,7 @@ while choice != 0:
         elif choice == 2: #ID SEARCH
             id_search()
         elif choice == 3: #TypE Filter
-            user_input = input("What type do you want to search?: ")
+            user_input = input("What type do you want to filter?: ")
             filter_by_type(user_input)
             # selection = input("Search by:\n"
             #       "1. Type 1\n"
