@@ -124,19 +124,28 @@ while choice != 0:
             result = name_search()
         elif choice == 2: #ID SEARCH
             id_search()
-        elif choice == 3: #Type 1 FILTER
-            filter_by_type()
-        elif choice == 4: #Type 2 Filter
-            filter_by_type()
-        elif choice == 5: #speed
+        elif choice == 3: #Type 2 Filter
+            selection = input("Search by:\n"
+                  "1. Type 1\n"
+                  "2. Type 2\n"
+                  "Your choice: 2")
+            try: 
+                selection = int(selection)
+                if selection == 1:
+                    filter_range("Type", "Type 1")
+                if selection == 2:
+                    filter_range("Type", "Type 2")
+            except ValueError:
+                print("You must select a number")
+        elif choice == 4: #speed
             filter_range("speed", "Speed")
-        elif choice == 6: #weight
+        elif choice == 5: #weight
             filter_choice("Weight", "Weight (kg)", "Weight (lbs)")
-        elif choice == 7: #height
+        elif choice == 6: #height
             filter_choice("Height", "Height (m)", "Height (ft)")
-        elif choice == 8: #height
+        elif choice == 7: #height
             filter_range("HP", "HP")
-        elif choice == 9:
+        elif choice == 8:
             print("Exiting...")    
             break     
     except ValueError:
