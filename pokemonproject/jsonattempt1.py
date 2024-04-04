@@ -69,7 +69,7 @@ def name_search():
             matches.append(pokemon["Name"])
     print(matches)
 
-def filter_range(attribute_name, unit): #when calling, atribute and unit should be in quptes as they are strings
+def filter_range(attribute_name, unit): #when calling, atribute and unit should be in quptes as they are string    
     min_val = input(f"Enter the minimum {attribute_name}: ") #f and curly brackets lets me print the interchagable variable
     max_val = input(f"Enter the maximum {attribute_name}: ")
     try:
@@ -90,28 +90,28 @@ def id_search():
             id_out.append(pokemon["Name"])
     pretty_print(id_out)
 
-def filter_choice(): #refactor to get any values
-    choice = input("What do you want to filter by?\n"
-                   "1. Filter by kg\n"
-                   "2. Filter by lbs\n"
+def filter_choice(attribute_name, unit1, unit2): #refactored to get any values
+    choice = input(f"What do you want to filter {attribute_name} by?\n"
+                   f"1. Filter by {unit1}\n"
+                   f"2. Filter by {unit2}\n"
                    "Your choice: \n")
     try:
-        choice == int(choice)
+        choice = int(choice)
         if choice == 1:
-            filter_range("Weight kg","Weight (kg)")
-            return 1
+            filter_range(f"{attribute_name}",f"{unit1}")
+            # return 1
         elif choice == 2:
-            filter_range("Weight lbs","Weight (lbs)")
-            return 2
+            filter_range(f"{attribute_name}",f"{unit2}")
+            # return 2
     except ValueError:
         print("Choice must be a number")
 
 # def filter_type(): #i have the filter for the list but don't know how to not hardcode the choice of the category to filter by
-    user_input = input("Enter the type of the Pokémon: ")    
-    filterlist = []
-    for pokemon in mylist: 
-        if pokemon["Type 1"].lower() == user_input.lower():
-            filterlist.append(pokemon)
+    # user_input = input("Enter the type of the Pokémon: ")    
+    # filterlist = []
+    # for pokemon in mylist: 
+    #     if pokemon["Type 1"].lower() == user_input.lower():
+    #         filterlist.append(pokemon)
 
 print("Welcome to the pokedex")
 choice = None
@@ -132,15 +132,8 @@ while choice != 0:
             filter_range("speed", "Speed")
         elif choice == 6: #weight
             filter_choice()
-            if filter_choice == 1:
-                filter_range("weight", "Weight (kg)")
-            if filter_choice == 2:
-                filter_range("Weight", "Weight (lbs)")
         elif choice == 7: #height
-            filter_choice()
-            
-            filter_range("Height", "Height (m)")
-            filter_range("Height", "Height (ft)")
+            filter_choice("Height", "Height (m)", "Height (ft)")
         elif choice == 8:
             print("Exiting...")    
             break     
