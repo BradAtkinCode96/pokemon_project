@@ -131,10 +131,12 @@ while choice != 0:
         elif choice == 5: #speed
             filter_range("speed", "Speed")
         elif choice == 6: #weight
-            filter_choice()
+            filter_choice("Weight", "Weight (kg)", "Weight (lbs)")
         elif choice == 7: #height
             filter_choice("Height", "Height (m)", "Height (ft)")
-        elif choice == 8:
+        elif choice == 8: #height
+            filter_range("HP", "HP")
+        elif choice == 9:
             print("Exiting...")    
             break     
     except ValueError:
