@@ -63,10 +63,10 @@ def filter_range(attribute_name, unit): #when calling, atribute and unit should 
     max_val = input(f"Enter the maximum {attribute_name}: ")
     try:
         filtered_pokemon = []
-        min_val = int(min_val)
-        max_val = int(max_val)
+        min_val = float(min_val)
+        max_val = float(max_val)
         for pokemon in mylist: 
-            if min_val <= int(pokemon[unit]) <= max_val:
+            if min_val <= float(pokemon[f"{unit}"]) <= max_val: #there is a speical case here for feet because the feet and inches cannot be converted to a float
                 filtered_pokemon.append(pokemon["Name"])
         pretty_print(filtered_pokemon)
     except ValueError:
@@ -89,19 +89,18 @@ while choice != 0:
         elif choice == 4: #speed
             filter_range("speed", "Speed")
         elif choice == 5: #weight
-            while choice == 5:
-                selection = input("Search by:\n"
-                                "1. Kilograms\n"
-                                "2. Pounds\n"
-                                "Your choice: ")
-                try: 
-                    selection = int(selection)
-                    if selection == 1:
-                        filter_range("Weight", "Weight (kg)")
-                    if selection == 2:
-                        filter_range("Weight", "Weight (lbs)")
-                except ValueError:
-                    print("You must select a number")
+            selection = input("Search by:\n"
+                            "1. Kilograms\n"
+                            "2. Pounds\n"
+                            "Your choice: ")
+            try: 
+                selection = int(selection)
+                if selection == 1:
+                    filter_range("Weight", "Weight (kg)")
+                if selection == 2:
+                    filter_range("Weight", "Weight (lbs)")
+            except ValueError:
+                print("You must select a number")
         elif choice == 6: #height
             selection = input("Search by:\n"
                               "1. Meters\n"
@@ -112,7 +111,7 @@ while choice != 0:
                 if selection == 1:
                     filter_range("Height", "Height (m)")
                 if selection == 2:
-                    filter_range("Height", "Weight (ft)")
+                    filter_range("Height", "Height (ft)")
             except ValueError:
                 print("You must select a number")
         elif choice == 7: #HP
