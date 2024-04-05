@@ -106,13 +106,6 @@ def filter_choice(attribute_name, unit1, unit2): #refactored to get any values
     except ValueError:
         print("Choice must be a number")
 
-# def filter_type(): #i have the filter for the list but don't know how to not hardcode the choice of the category to filter by
-    # user_input = input("Enter the type of the Pokémon: ")    
-    # filterlist = []
-    # for pokemon in mylist: 
-    #     if pokemon["Type 1"].lower() == user_input.lower():
-    #         filterlist.append(pokemon)
-
 print("Welcome to the pokedex")
 choice = None
 
@@ -127,23 +120,12 @@ while choice != 0:
         elif choice == 3: #TypE Filter
             user_input = input("What type do you want to search?: ")
             filter_by_type(user_input)
-            # selection = input("Search by:\n"
-            #       "1. Type 1\n"
-            #       "2. Type 2\n"
-            #       "Your choice: 2")
-            # try: 
-            #     selection = int(selection)
-            #     if selection == 1:
-
-            #     if selection == 2:
-            # except ValueError:
-            #     print("You must select a number")
         elif choice == 4: #speed
             filter_range("speed", "Speed")
         elif choice == 5: #weight
             filter_choice("Weight", "Weight (kg)", "Weight (lbs)")
         elif choice == 6: #height
-            filter_choice("Height", "Height (m)", "Height (ft)")
+            filter_range("Height", "Height (m)")
         elif choice == 7: #height
             filter_range("HP", "HP")
         elif choice == 8:
