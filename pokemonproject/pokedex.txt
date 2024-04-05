@@ -17,10 +17,10 @@ print(basic_high_usage)
 
         
         "Would you like to filter further?",
-           "Filter by Type",
-           "Filter by Speed Range",
-           "Filter by Weight Range",
-           "Filter by Height Range",
-           "Filter by HP Range",
+           "1Filter by Type",
+           "2Filter by Speed Range",
+           "3Filter by Weight Range",
+           "4Filter by Height Range",
+           "5Filter by HP Range",
            "Your choice"
             

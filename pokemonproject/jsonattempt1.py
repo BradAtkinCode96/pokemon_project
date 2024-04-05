@@ -68,7 +68,6 @@ def filter_range(attribute_name, unit): #when calling, atribute and unit should 
                 filtered_pokemon.append(pokemon["Name"])
         namelist = []
         filtered_pokemon = []
-
         min_val = float(min_val)
         max_val = float(max_val)
         for pokemon in mylist: 
@@ -83,17 +82,25 @@ def filter_range(attribute_name, unit): #when calling, atribute and unit should 
 def move_display(filtered_list): #plug in the list from previous function to allow move selection
     movelist = []
     for pokemon in filtered_list:
-        movelist.append(pokemon["Moves"])
+        movelist.append(pokemon["Name"]["Moves"])
     pprint(movelist)
 
-def moreFilter(extralist):
-    print("Do you want ot filter further?")
-    option = input(SUBMENU)
-    user_input = input("Enter the name of the Pokémon: ") 
-    matches = []
-    for pokemon in mylist: 
-        if user_input.lower() in extralist["Name"].lower(): #YOU NEED TO PLUG IN THE FILTERPOKEMON LIST OF DICTIONARIES
-            matches.append(pokemon)
+def layerFilter(extralist): #plug in the returned list from previous filter
+    print("Do you want to filter further?")
+    option = input(f"{pretty_print(SUBMENU)}")
+    if option != 0:
+        if option == 1:
+            type_to_filter = input("Enter the type to search:")
+            dlayerfilter = []
+            layerfilter = []
+    for pokemon in extralist:
+        try:
+            if pokemon["Type 1"].lower() == type_to_filter.lower() or pokemon["Type 2"].lower() == type_to_filter.lower():
+                layerFilter.append(pokemon["Name"])
+                dlayerfilter.append(pokemon)
+        except ValueError:
+            print("valid selection please")
+    pprint(layerfilter)
 
 print("Welcome to the pokedex")
 choice = None
