@@ -4,6 +4,9 @@ with open(r"C:\Users\Bradl\Documents\GitHub\PokemonProject\pokemonproject\shrtpo
     json_data = file.read()
     mylist = json.loads(json_data)
 
+import pprint #-> this does work!
+pp = pprint.PrettyPrinter(indent=0) 
+
 MENU = ["Search by Name",
         "Search by Id",
         "Filter by Type",
@@ -32,7 +35,7 @@ def id_search():
     for pokemon in mylist: 
         if pokemon["Id"] == user_input:
             id_out.append(pokemon["Name"])
-    pretty_print(id_out)
+    pprint(id_out)
 
 def filter_by_type(type_to_filter):
     filtered_pokemon = []
@@ -42,7 +45,7 @@ def filter_by_type(type_to_filter):
                 filtered_pokemon.append(pokemon["Name"])
         except ValueError:
             print("valid selection please")
-    pretty_print(filtered_pokemon)
+    pprint(filtered_pokemon)
 
 def name_search(): 
     user_input = input("Enter the name of the Pokémon: ") 
@@ -73,10 +76,11 @@ def filter_range(attribute_name, unit): #when calling, atribute and unit should 
     except ValueError:
         print("Must be an integer")
 
-def move_display():
+def move_display(filtered_list): #plug in the list from previous function to allow move selection
     movelist = []
-    for pokemon in mylist:
+    for pokemon in filtered_list:
         movelist.append(pokemon["Moves"])
+    pprint(movelist)
 
 print("Welcome to the pokedex")
 choice = None
