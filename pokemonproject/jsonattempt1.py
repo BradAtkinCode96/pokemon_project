@@ -73,6 +73,11 @@ def filter_range(attribute_name, unit): #when calling, atribute and unit should 
     except ValueError:
         print("Must be an integer")
 
+def move_display():
+    movelist = []
+    for pokemon in mylist:
+        movelist.append(pokemon["Moves"])
+
 print("Welcome to the pokedex")
 choice = None
 
