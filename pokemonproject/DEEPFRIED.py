@@ -12,7 +12,7 @@ MENU = ["Search by Name",
         "Filter by Type",
         "Filter by Speed Range",
         "Filter by Weight Range",
-        "Filter by Height Range",
+        "Filter by Height (m) Range",
         "Filter by HP Range"]
 
 SUBMENU = ["Would you like to filter further?",
@@ -55,17 +55,10 @@ def name_search():
             matches.append(pokemon)
     pprint.pp(matches)
 
-def filter_range(attribute_name, unit): #when calling, atribute and unit should be in quptes as they are string    
+def filter_range(attribute_name, unit): # reutrns filterd lst of d. when calling, atribute and unit should be in quptes as they are string    
     min_val = input(f"Enter the minimum {attribute_name}: ") #f and curly brackets lets me print the interchagable variable
     max_val = input(f"Enter the maximum {attribute_name}: ")
     try:
-        if unit == "Height (ft)":                       #all honesty this was chat gpt because fuck american units
-            height = pokemon["Height (ft)"].split("'")
-            feet = float(height[0])
-            inches = float(height[1].replace('"', ''))
-            attribute_value = (feet * 12) + inches
-            if min_val <= attribute_value <= max_val:
-                filtered_pokemon.append(pokemon["Name"])
         namelist = []
         filtered_pokemon = []
         min_val = float(min_val)
