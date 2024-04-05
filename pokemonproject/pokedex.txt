@@ -14,11 +14,13 @@ for user in users_data:
 print(basic_high_usage)
 
 
-"Search by Name",
-        "Search by Id",
-        "Filter by Type 1",
-        "Filter By Type 2",
-        "Filter by Speed Range", Speed
-        "Filter by Weight Range",Weight (lbs) Weight (kg)
-        Height (m) Height (ft)
-        "Filter by HP Range" HP
+
+        
+        "Would you like to filter further?",
+           "Filter by Type",
+           "Filter by Speed Range",
+           "Filter by Weight Range",
+           "Filter by Height Range",
+           "Filter by HP Range",
+           "Your choice"
+            

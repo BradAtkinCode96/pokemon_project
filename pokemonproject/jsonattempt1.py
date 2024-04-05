@@ -34,7 +34,7 @@ def id_search():
     id_out = [] 
     for pokemon in mylist: 
         if pokemon["Id"] == user_input:
-            id_out.append(pokemon["Name"])
+            id_out.append(pokemon)
     pprint(id_out)
 
 def filter_by_type(type_to_filter):
@@ -52,8 +52,8 @@ def name_search():
     matches = []
     for pokemon in mylist: 
         if user_input.lower() in pokemon["Name"].lower():
-            matches.append(pokemon["Name"])
-    print(matches)
+            matches.append(pokemon)
+    pprint.pp(matches)
 
 def filter_range(attribute_name, unit): #when calling, atribute and unit should be in quptes as they are string    
     min_val = input(f"Enter the minimum {attribute_name}: ") #f and curly brackets lets me print the interchagable variable
@@ -66,13 +66,17 @@ def filter_range(attribute_name, unit): #when calling, atribute and unit should 
             attribute_value = (feet * 12) + inches
             if min_val <= attribute_value <= max_val:
                 filtered_pokemon.append(pokemon["Name"])
+        namelist = []
         filtered_pokemon = []
+
         min_val = float(min_val)
         max_val = float(max_val)
         for pokemon in mylist: 
             if min_val <= float(pokemon[f"{unit}"]) <= max_val: #there is a speical case here for feet because the feet and inches cannot be converted to a float
-                filtered_pokemon.append(pokemon["Name"])
-        pretty_print(filtered_pokemon)
+                namelist.append(pokemon["Name"]) #list of names (just for printing and ease of reading)
+                filtered_pokemon.append(pokemon) #list of all filtered pokemons dictionaries
+        pretty_print(namelist)
+        return filtered_pokemon
     except ValueError:
         print("Must be an integer")
 
@@ -81,6 +85,15 @@ def move_display(filtered_list): #plug in the list from previous function to all
     for pokemon in filtered_list:
         movelist.append(pokemon["Moves"])
     pprint(movelist)
+
+def moreFilter(extralist):
+    print("Do you want ot filter further?")
+    option = input(SUBMENU)
+    user_input = input("Enter the name of the Pokémon: ") 
+    matches = []
+    for pokemon in mylist: 
+        if user_input.lower() in extralist["Name"].lower(): #YOU NEED TO PLUG IN THE FILTERPOKEMON LIST OF DICTIONARIES
+            matches.append(pokemon)
 
 print("Welcome to the pokedex")
 choice = None
