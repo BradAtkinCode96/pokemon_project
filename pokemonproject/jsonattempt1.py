@@ -26,12 +26,6 @@ def pretty_print(lst):
     for i in range(len(lst)):
         print(f"{i+1}. {lst[i]}")
 
-def valid_types():
-    values = []
-    for pokemon in mylist:
-        values.append(pokemon["Type 1"]) and values.append(pokemon["Type 2"])
-    pretty_print(values)
-
 def id_search(): 
     user_input = input("Enter the id of the Pokémon: ")
     id_out = [] 
@@ -62,6 +56,13 @@ def filter_range(attribute_name, unit): #when calling, atribute and unit should 
     min_val = input(f"Enter the minimum {attribute_name}: ") #f and curly brackets lets me print the interchagable variable
     max_val = input(f"Enter the maximum {attribute_name}: ")
     try:
+        if unit == "Height (ft)":                       #all honesty this was chat gpt because fuck american units
+            height = pokemon["Height (ft)"].split("'")
+            feet = float(height[0])
+            inches = float(height[1].replace('"', ''))
+            attribute_value = (feet * 12) + inches
+            if min_val <= attribute_value <= max_val:
+                filtered_pokemon.append(pokemon["Name"])
         filtered_pokemon = []
         min_val = float(min_val)
         max_val = float(max_val)
@@ -102,18 +103,7 @@ while choice != 0:
             except ValueError:
                 print("You must select a number")
         elif choice == 6: #height
-            selection = input("Search by:\n"
-                              "1. Meters\n"
-                              "2. feet\n"
-                              "Your choice: ")
-            try: 
-                selection = int(selection)
-                if selection == 1:
                     filter_range("Height", "Height (m)")
-                if selection == 2:
-                    filter_range("Height", "Height (ft)")
-            except ValueError:
-                print("You must select a number")
         elif choice == 7: #HP
             filter_range("HP", "HP")
         elif choice == 8:
