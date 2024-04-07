@@ -13,7 +13,9 @@ MENU = ["Search by Name",
         "Filter by Speed Range",
         "Filter by Weight Range",
         "Filter by Height (m) Range",
-        "Filter by HP Range"]
+        "Filter by HP Range",
+        "Add Pokemon to my team: "
+        "View my teams"]
 
 SUBMENU = ["What would you like to filter further?",
            "Filter by Type",
@@ -252,8 +254,9 @@ while choice != 0:
                 layerFilter(egg)
             else:
                 break
-
         elif choice == 8:
+            pass            
+        elif choice == 9:
             print("Exiting...")    
             break     
     except ValueError:
