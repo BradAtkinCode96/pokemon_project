@@ -1,6 +1,6 @@
 import json
 
-with open(r"C:\Users\Bradl\Documents\GitHub\PokemonProject\pokemonproject\shrtpokedex.json") as file:
+with open(r"C:\Users\Bradl\Documents\GitHub\PokemonProject\pokemonproject\pokedex1.json") as file:
     json_data = file.read()
     mylist = json.loads(json_data)
 
