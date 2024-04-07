@@ -183,8 +183,14 @@ def layerFilter(extralist): #plug in the returned list from previous filter. FIL
     except ValueError:
         print("not a valid selection")
 
-def addToTeam(pokemon):
-    pass
+def moveToAdd(pokemon_names, pokemon):
+    moves_dict = {}
+    for pokemon in mylist:
+        if pokemon["Name"] in pokemon_names:
+            moves_dict[pokemon["Name"]] = pokemon["Moves"]
+            pprint(moves_dict)
+    return moves_dict
+
 
     
 
