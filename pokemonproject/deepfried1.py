@@ -183,7 +183,9 @@ def layerFilter(extralist): #plug in the returned list from previous filter. FIL
     except ValueError:
         print("not a valid selection")
 
-def addteam()
+def addToTeam(pokemon):
+    pass
+
     
 
 print("Welcome to the pokedex")
