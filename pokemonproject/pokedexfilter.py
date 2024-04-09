@@ -14,17 +14,17 @@ MENU = ["Search by Name",
         "Filter by Weight Range",
         "Filter by Height (m) Range",
         "Filter by HP Range",
-        "Add Pokemon to my team: "
-        "View my teams"]
+        "Add Pokemon to my team: ",
+        "View my teams"
+        ]
 
-SUBMENU = ["What would you like to filter further?",
-           "Filter by Type",
+SUBMENU = ["Filter by Type",
            "Filter by Speed Range",
            "Filter by Weight Range",
            "Filter by Height Range",
            "Filter by HP Range",
-           "Your choice",
-            ]
+           "Your choice"
+           ]
 
 def pretty_print(lst):
     print("\n")
@@ -39,16 +39,18 @@ def id_search():
             id_out.append(pokemon)
     pprint(id_out)
 
-def filter_by_type(type_to_filter):
+def filter_by_type(mylist, type_to_filter):
     filtered_pokemon = []
+    namelist = []
     for pokemon in mylist:
         try:
             if pokemon["Type 1"].lower() == type_to_filter.lower() or pokemon["Type 2"].lower() == type_to_filter.lower():
-                filtered_pokemon.append(pokemon["Name"])
+                namelist.append(pokemon["Name"])
+                filtered_pokemon.append(pokemon)
         except ValueError:
             print("valid selection please")
-    pprint(filtered_pokemon)
-
+    pretty_print(namelist)
+    return filtered_pokemon
 def name_search(): 
     user_input = input("Enter the name of the Pokémon: ") 
     matches = []
@@ -82,108 +84,117 @@ def move_display(filtered_list): #plug in the list from previous function to all
 
 def layerFilter(extralist): #plug in the returned list from previous filter. FILTERING A NEWLY RETURNED LIST 
     option = input(f"{pretty_print(SUBMENU)}")
-    try:
+    print("0 to stop filter")
+    try: 
         option = int(option)
-        if option != 0:
-            if option == 1: #filtering TYPE
-                type_to_filter = input("Enter the type to search:")
-                dlayerfilter = []
-                layerfilter = []
-                for pokemon in extralist:
-                    try:
-                        if pokemon["Type 1"].lower() == type_to_filter.lower() or pokemon["Type 2"].lower() == type_to_filter.lower():
-                            layerFilter.append(pokemon["Name"])
-                            dlayerfilter.append(pokemon)
-                    except ValueError:
-                        print("valid selection please")
-                pretty_print(layerfilter)
-                return dlayerfilter
-            elif option == 2:
-                    min_val = input("Min value: ")
-                    max_val = input("Max value: ")
-                    try:
-                        namelist = []
-                        filtered_pokemon = []
-                        min_val = float(min_val)
-                        max_val = float(max_val)
-                        for pokemon in extralist: 
-                            if min_val <= float(pokemon["Speed"]) <= max_val: #narrowing the list by the filter criteria
-                                namelist.append(pokemon["Name"]) #adding names to the name list (Printing only)
-                                filtered_pokemon.append(pokemon) 
-                                pretty_print(namelist)
-                                return filtered_pokemon #this is new list that is condensed by the filter just complete
-                    except ValueError:
-                        print("invalid selection")
-            elif option == 3:
-                kglb = input("1 is lbs or\n2 kg?")
-                #error handling if it works later
-                if kglb == 1:
-                    min_val = input("Min value: ")
-                    max_val = input("Max value: ")
-                    try:
-                        namelist = []
-                        filtered_pokemon = []
-                        min_val = float(min_val)
-                        max_val = float(max_val)
-                        for pokemon in extralist: 
-                            if min_val <= float(pokemon["Weight (lbs)"]) <= max_val:
-                                namelist.append(pokemon["Name"]) 
-                                filtered_pokemon.append(pokemon) 
-                                pretty_print(namelist)
-                    except ValueError:
-                        print("valid selection please")                                
-                elif kglb == 2:
-                    min_val = input("Min value: ")
-                    max_val = input("Max value: ")
-                    try:
-                        namelist = []
-                        filtered_pokemon = []
-                        min_val = float(min_val)
-                        max_val = float(max_val)
-                        for pokemon in extralist: 
-                            if min_val <= float(pokemon["Weight (kg)"]) <= max_val:
-                                namelist.append(pokemon["Name"]) 
-                                filtered_pokemon.append(pokemon) 
-                                pretty_print(namelist)
-                                return filtered_pokemon #for use in the next cycle with smaller.
-                
-                    except ValueError:
-                        print("valid selection please")
-            elif option == 4:
-                min_val = input("Min value: ")
-                max_val = input("Max value: ")
-                try:
-                    namelist = []
-                    filtered_pokemon = []
-                    min_val = float(min_val)
-                    max_val = float(max_val)
-                    for pokemon in extralist: 
-                        if min_val <= float(pokemon["Height"]) <= max_val:
-                            namelist.append(pokemon["Name"]) 
-                            filtered_pokemon.append(pokemon) 
-                            pretty_print(namelist)
-                            return filtered_pokemon #for use in the next cycle with smaller.               
-                except ValueError:
-                    print("valid selection please")
-            elif option == 5:
-                min_val = input("Min value: ")
-                max_val = input("Max value: ")
-                try:
-                    namelist = []
-                    filtered_pokemon = []
-                    min_val = float(min_val)
-                    max_val = float(max_val)
-                    for pokemon in extralist: 
-                        if min_val <= float(pokemon["HP"]) <= max_val:
-                            namelist.append(pokemon["Name"]) 
-                            filtered_pokemon.append(pokemon) 
-                            pretty_print(namelist)
-                            return filtered_pokemon #for use in the next cycle with smaller.               
-                except ValueError:
-                    print("valid selection please")                        
-
+        while option != 0: #this if is so the filering keeps prompting until one pokemon left 
+            try:
+                option = int(option)
+                if option != 0:
+                    if option == 1: #filtering TYPE
+                        type_to_filter = input("Enter the type to search:")
+                        dlayerfilter = []
+                        layerfilter = []
+                        for pokemon in extralist:
+                            try:
+                                if pokemon["Type 1"].lower() == type_to_filter.lower() or pokemon["Type 2"].lower() == type_to_filter.lower():
+                                    layerfilter.append(pokemon["Name"])
+                                    dlayerfilter.append(pokemon)
+                            except ValueError:
+                                print("valid selection please")
+                        pretty_print(layerfilter)
+                        return dlayerfilter
+                    elif option == 2:
+                            min_val = input("Min value: ")
+                            max_val = input("Max value: ")
+                            try:
+                                namelist = []
+                                filtered_pokemon = []
+                                min_val = float(min_val)
+                                max_val = float(max_val)
+                                for pokemon in extralist: 
+                                    if min_val <= float(pokemon["Speed"]) <= max_val: #narrowing the list by the filter criteria
+                                        namelist.append(pokemon["Name"]) #adding names to the name list (Printing only)
+                                        filtered_pokemon.append(pokemon) 
+                                        pretty_print(namelist)
+                                        return filtered_pokemon #this is new list that is condensed by the filter just complete
+                            except ValueError:
+                                print("invalid selection")
+                    elif option == 3:
+                        kglb = input("1 is lbs or\n2 kg?")
+                        #error handling if it works later
+                        if kglb == "1":
+                            min_val = input("Min value: ")
+                            max_val = input("Max value: ")
+                            try:
+                                namelist = []
+                                filtered_pokemon = []
+                                min_val = float(min_val)
+                                max_val = float(max_val)
+                                for pokemon in extralist: 
+                                    if min_val <= float(pokemon["Weight (lbs)"]) <= max_val:
+                                        namelist.append(pokemon["Name"]) 
+                                        filtered_pokemon.append(pokemon) 
+                                        pretty_print(namelist)
+                            except ValueError:
+                                print("valid selection please")                                
+                        elif kglb == "1":
+                            min_val = input("Min value: ")
+                            max_val = input("Max value: ")
+                            try:
+                                namelist = []
+                                filtered_pokemon = []
+                                min_val = float(min_val)
+                                max_val = float(max_val)
+                                for pokemon in extralist: 
+                                    if min_val <= float(pokemon["Weight (kg)"]) <= max_val:
+                                        namelist.append(pokemon["Name"]) 
+                                        filtered_pokemon.append(pokemon) 
+                                        pretty_print(namelist)
+                                        return filtered_pokemon #for use in the next cycle with smaller.
+                        
+                            except ValueError:
+                                print("valid selection please")
+                    elif option == 4:
+                        min_val = input("Min value: ")
+                        max_val = input("Max value: ")
+                        try:
+                            namelist = []
+                            filtered_pokemon = []
+                            min_val = float(min_val)
+                            max_val = float(max_val)
+                            for pokemon in extralist: 
+                                if min_val <= float(pokemon["Height"]) <= max_val:
+                                    namelist.append(pokemon["Name"]) 
+                                    filtered_pokemon.append(pokemon) 
+                                    pretty_print(namelist)
+                                    return filtered_pokemon #for use in the next cycle with smaller.               
+                        except ValueError:
+                            print("valid selection please")
+                    elif option == 5:
+                        min_val = input("Min value: ")
+                        max_val = input("Max value: ")
+                        try:
+                            namelist = []
+                            filtered_pokemon = []
+                            min_val = float(min_val)
+                            max_val = float(max_val)
+                            for pokemon in extralist: 
+                                if min_val <= float(pokemon["HP"]) <= max_val:
+                                    namelist.append(pokemon["Name"]) 
+                                    filtered_pokemon.append(pokemon) 
+                                    pretty_print(namelist)
+                                    return filtered_pokemon #for use in the next cycle with smaller.               
+                        except ValueError:
+                            print("valid selection please") 
+                    elif option == 6:
+                        return choice == None
+                    elif option == 0:
+                        break
+            except ValueError:
+                print("not a valid selection")
     except ValueError:
-        print("not a valid selection")
+            print("not a valid selection")
 
 def moveToAdd(pokemon_names, pokemon):
     moves_dict = {}
@@ -199,7 +210,7 @@ def moveToAdd(pokemon_names, pokemon):
 print("Welcome to the pokedex")
 choice = None
 
-while choice != 0:
+while choice == None:
     try:
         pretty_print(MENU)
         choice = int(input("Please make a selection: "))
@@ -209,7 +220,12 @@ while choice != 0:
             id_search()
         elif choice == 3: #TypE Filter
             user_input = input("What type do you want to filter by?: ")
-            filter_by_type(user_input)
+            egg = filter_by_type(mylist, user_input) #mylist for first type filter, then egg for second layer because type becomes redunant after one filter
+            yorn = input("Do you want to filter {user_input} further? y or n: ")
+            if yorn == "y" or "Y":
+                layerFilter(egg)
+            else:
+                break
         elif choice == 4: #speed
             egg = filter_range("speed", "Speed")
             yorn = input("Do you want to filter further? y or n: ")
