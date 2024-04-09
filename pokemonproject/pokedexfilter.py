@@ -87,23 +87,23 @@ def layerFilter(extralist): #plug in the returned list from previous filter. FIL
     print("0 to stop filter")
     try: 
         option = int(option)
-        while option != 0: #this if is so the filering keeps prompting until one pokemon left 
+        while option != 0: #this if is so the filtering keeps prompting until one pokemon left 
             try:
                 option = int(option)
                 if option != 0:
                     if option == 1: #filtering TYPE
                         type_to_filter = input("Enter the type to search:")
-                        dlayerfilter = []
-                        layerfilter = []
+                        namelist = []
+                        filtered_pokemon = []
                         for pokemon in extralist:
                             try:
                                 if pokemon["Type 1"].lower() == type_to_filter.lower() or pokemon["Type 2"].lower() == type_to_filter.lower():
-                                    layerfilter.append(pokemon["Name"])
-                                    dlayerfilter.append(pokemon)
+                                    namelist.append(pokemon["Name"])
+                                    filtered_pokemon.append(pokemon)
                             except ValueError:
                                 print("valid selection please")
-                        pretty_print(layerfilter)
-                        return dlayerfilter
+                        pretty_print(namelist)
+                        layerFilter(filtered_pokemon) #restart the process with the smaller list
                     elif option == 2:
                             min_val = input("Min value: ")
                             max_val = input("Max value: ")
@@ -117,7 +117,7 @@ def layerFilter(extralist): #plug in the returned list from previous filter. FIL
                                         namelist.append(pokemon["Name"]) #adding names to the name list (Printing only)
                                         filtered_pokemon.append(pokemon) 
                                         pretty_print(namelist)
-                                        return filtered_pokemon #this is new list that is condensed by the filter just complete
+                                        layerFilter(filtered_pokemon)#this is new list that is condensed by the filter just complete
                             except ValueError:
                                 print("invalid selection")
                     elif option == 3:
@@ -136,6 +136,7 @@ def layerFilter(extralist): #plug in the returned list from previous filter. FIL
                                         namelist.append(pokemon["Name"]) 
                                         filtered_pokemon.append(pokemon) 
                                         pretty_print(namelist)
+                                        layerFilter(filtered_pokemon)
                             except ValueError:
                                 print("valid selection please")                                
                         elif kglb == "1":
@@ -151,7 +152,7 @@ def layerFilter(extralist): #plug in the returned list from previous filter. FIL
                                         namelist.append(pokemon["Name"]) 
                                         filtered_pokemon.append(pokemon) 
                                         pretty_print(namelist)
-                                        return filtered_pokemon #for use in the next cycle with smaller.
+                                        layerFilter(filtered_pokemon) #for use in the next cycle with smaller.
                         
                             except ValueError:
                                 print("valid selection please")
@@ -164,11 +165,11 @@ def layerFilter(extralist): #plug in the returned list from previous filter. FIL
                             min_val = float(min_val)
                             max_val = float(max_val)
                             for pokemon in extralist: 
-                                if min_val <= float(pokemon["Height"]) <= max_val:
+                                if min_val <= float(pokemon["Height (m)"]) <= max_val:
                                     namelist.append(pokemon["Name"]) 
                                     filtered_pokemon.append(pokemon) 
                                     pretty_print(namelist)
-                                    return filtered_pokemon #for use in the next cycle with smaller.               
+                                    layerFilter(filtered_pokemon) #for use in the next cycle with smaller.               
                         except ValueError:
                             print("valid selection please")
                     elif option == 5:
@@ -184,7 +185,7 @@ def layerFilter(extralist): #plug in the returned list from previous filter. FIL
                                     namelist.append(pokemon["Name"]) 
                                     filtered_pokemon.append(pokemon) 
                                     pretty_print(namelist)
-                                    return filtered_pokemon #for use in the next cycle with smaller.               
+                                    layerFilter(filtered_pokemon) #for use in the next cycle with smaller.               
                         except ValueError:
                             print("valid selection please") 
                     elif option == 6:
@@ -193,6 +194,8 @@ def layerFilter(extralist): #plug in the returned list from previous filter. FIL
                         break
             except ValueError:
                 print("not a valid selection")
+        else:
+            print("only 1 pokemon left")        
     except ValueError:
             print("not a valid selection")
 
@@ -220,17 +223,17 @@ while choice == None:
             id_search()
         elif choice == 3: #TypE Filter
             user_input = input("What type do you want to filter by?: ")
-            egg = filter_by_type(mylist, user_input) #mylist for first type filter, then egg for second layer because type becomes redunant after one filter
-            yorn = input("Do you want to filter {user_input} further? y or n: ")
+            newlist = filter_by_type(mylist, user_input) #mylist for first type filter, then newlist for second layer because type becomes redunant after one filter
+            yorn = input(f"Do you want to filter {user_input} further? y or n: ")
             if yorn == "y" or "Y":
-                layerFilter(egg)
+                layerFilter(newlist)
             else:
                 break
         elif choice == 4: #speed
-            egg = filter_range("speed", "Speed")
+            newlist = filter_range("speed", "Speed")
             yorn = input("Do you want to filter further? y or n: ")
             if yorn == "y" or "Y":
-                layerFilter(egg)
+                layerFilter(newlist)
             else:
                 break # break for now for whatever
         elif choice == 5: #weight
@@ -241,33 +244,33 @@ while choice == None:
             try: 
                 selection = int(selection)
                 if selection == 1:
-                    egg = filter_range("Weight", "Weight (kg)") # i want to filter the list that this returns
+                    newlist = filter_range("Weight", "Weight (kg)") # i want to filter the list that this returns
                     yorn = input("Do you want to filter further? y or n: ")
                     if yorn == "y" or "Y":
-                        layerFilter(egg)
+                        layerFilter(newlist)
                     else:
                         break
                 if selection == 2:
-                    egg = filter_range("Weight", "Weight (lbs)")
+                    newlist = filter_range("Weight", "Weight (lbs)")
                     yorn = input("Do you want to filter further?: y or n")
                     if yorn == "y" or "Y":
-                        layerFilter(egg)
+                        layerFilter(newlist)
                     else:
                         break
             except ValueError:
                 print("You must select a number")
         elif choice == 6: #height
-                    egg = filter_range("Height", "Height (m)")
+                    newlist = filter_range("Height", "Height (m)")
                     yorn = input("Do you want to filter further?: y or n")
                     if yorn == "y" or "Y":
-                        layerFilter(egg)
+                        layerFilter(newlist)
                     else:
                         break
         elif choice == 7: #HP
-            egg = filter_range("HP", "HP")
+            newlist = filter_range("HP", "HP")
             yorn = input("Do you want to filter further?: y or n")
             if yorn == "y" or "Y":
-                layerFilter(egg)
+                layerFilter(newlist)
             else:
                 break
         elif choice == 8:
