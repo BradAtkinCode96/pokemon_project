@@ -31,6 +31,14 @@ def pretty_print(lst):
     for i in range(len(lst)):
         print(f"{i+1}. {lst[i]}")
 
+def name_search(): 
+    user_input = input("Enter the name of the Pokémon: ") 
+    matches = []
+    for pokemon in mylist: 
+        if user_input.lower() in pokemon["Name"].lower():
+            matches.append(pokemon)
+    pprint.pp(matches)
+
 def id_search(): 
     user_input = input("Enter the id of the Pokémon: ")
     id_out = [] 
@@ -51,13 +59,6 @@ def filter_by_type(mylist, type_to_filter):
             print("valid selection please")
     pretty_print(namelist)
     return newlist
-def name_search(): 
-    user_input = input("Enter the name of the Pokémon: ") 
-    matches = []
-    for pokemon in mylist: 
-        if user_input.lower() in pokemon["Name"].lower():
-            matches.append(pokemon)
-    pprint.pp(matches)
 
 def filter_range(attribute_name, unit): #(lst,a_n, unit) could refactor to include a list variable of which list to use? # reutrns filterd lst of d. when calling, atribute and unit should be in quptes as they are string . this comment is too long now  
     min_val = input(f"Enter the minimum {attribute_name}: ") #f and curly brackets lets me print the interchagable variable
@@ -199,12 +200,15 @@ def layerFilter(extralist): #plug in the returned list from previous filter. FIL
     except ValueError:
             print("not a valid selection")
 
-def moveToAdd(pokemon_names, pokemon):
+def moveToAdd(pokemon):
+    matches = []
     moves_dict = {}
-    for pokemon in mylist:
-        if pokemon["Name"] in pokemon_names:
-            moves_dict[pokemon["Name"]] = pokemon["Moves"]
-            pprint(moves_dict)
+    for pokemon in mylist: 
+        if user_input.lower() in pokemon["Name"].lower():
+            matches.append(pokemon)
+            moves_dict.update(pokemon["Moves"])
+            pretty_print(moves_dict)
+    print(moves_dict)
     return moves_dict
 
 
@@ -274,9 +278,10 @@ while choice == None:
             else:
                 break
         elif choice == 8:
-            pass            
+            teamchoice = input("enter the name of the pokemon you want to add")
+            moveToAdd(teamchoice)
         elif choice == 9:
-            print("Exiting...")    
+            print("Exiting...")   
             break     
     except ValueError:
         print(f"Error, '{choice}' is not a valid option")
