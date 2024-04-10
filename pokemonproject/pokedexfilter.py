@@ -26,6 +26,10 @@ SUBMENU = ["Filter by Type",
            "Your choice"
            ]
 
+def dict_pretty_print(my_dict):
+    for i, (key, value) in enumerate(my_dict.items(), start=1):
+        print(f"{i}. {key}: {value}")
+
 def pretty_print(lst):
     print("\n")
     for i in range(len(lst)):
@@ -200,15 +204,15 @@ def layerFilter(extralist): #plug in the returned list from previous filter. FIL
     except ValueError:
             print("not a valid selection")
 
-def moveToAdd(pokemon):
+def moveToAdd():
+    user_input = input("enter the name of the pokemon you want to add")
     matches = []
     moves_dict = {}
     for pokemon in mylist: 
         if user_input.lower() in pokemon["Name"].lower():
             matches.append(pokemon)
             moves_dict.update(pokemon["Moves"])
-            pretty_print(moves_dict)
-    print(moves_dict)
+    dict_pretty_print(moves_dict)
     return moves_dict
 
 
@@ -278,8 +282,9 @@ while choice == None:
             else:
                 break
         elif choice == 8:
-            teamchoice = input("enter the name of the pokemon you want to add")
-            moveToAdd(teamchoice)
+            moveToAdd()
+            input("Enter which moves to add, separated by a comma")
+
         elif choice == 9:
             print("Exiting...")   
             break     
