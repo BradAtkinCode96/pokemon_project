@@ -59,7 +59,7 @@ def name_search():
             matches.append(pokemon)
     pprint.pp(matches)
 
-def filter_range(attribute_name, unit): #could refactor to include a list variable of which list to use? # reutrns filterd lst of d. when calling, atribute and unit should be in quptes as they are string . this comment is too long now  
+def filter_range(attribute_name, unit): #(lst,a_n, unit) could refactor to include a list variable of which list to use? # reutrns filterd lst of d. when calling, atribute and unit should be in quptes as they are string . this comment is too long now  
     min_val = input(f"Enter the minimum {attribute_name}: ") #f and curly brackets lets me print the interchagable variable
     max_val = input(f"Enter the maximum {attribute_name}: ")
     try:
