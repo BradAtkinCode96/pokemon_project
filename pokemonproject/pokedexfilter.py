@@ -88,10 +88,9 @@ def move_display(filtered_list): #plug in the list from previous function to all
     pprint(movelist)
 
 def layerFilter(extralist): #plug in the returned list from previous filter. FILTERING A NEWLY RETURNED LIST 
-    option = input(f"{pretty_print(SUBMENU)}")
+    option = input(f"{pretty_print(SUBMENU)}") #move inside while?
     print("0 to stop filter")
-    try: 
-        option = int(option)
+    if extralist.len() > 1:
         while option != 0: #this if is so the filtering keeps prompting until one pokemon left 
             try:
                 option = int(option)
@@ -198,12 +197,9 @@ def layerFilter(extralist): #plug in the returned list from previous filter. FIL
                     elif option == 0:
                         break
             except ValueError:
-                print("not a valid selection")
-        else:
-            print("only 1 pokemon left")        
-    except ValueError:
-            print("not a valid selection")
-
+                print("not a valid selection")           
+    else:
+        print("only 1 pokemon left")
 def moveToAdd():
     user_input = input("enter the name of the pokemon you want to add")
     matches = []
