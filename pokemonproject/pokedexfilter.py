@@ -51,17 +51,17 @@ def id_search():
             id_out.append(pokemon)
     pprint(id_out)
 
-def filter_by_type(mylist, type_to_filter):                                                                                                 
-    newlist = []
-    namelist = []
-    for pokemon in mylist:
+"""
+"""
+
+def filter_by_type(lst, type_to_filter):                                                                                                 
+    newlist = []    
+    for pokemon in lst:
         try:
             if pokemon["Type 1"].lower() == type_to_filter.lower() or pokemon["Type 2"].lower() == type_to_filter.lower():
-                namelist.append(pokemon["Name"])
                 newlist.append(pokemon)
         except ValueError:
             print("valid selection please")
-    pretty_print(namelist)
     return newlist
 
 def filter_range(attribute_name, unit): #(lst,a_n, unit) could refactor to include a list variable of which list to use? # reutrns filterd lst of d. when calling, atribute and unit should be in quptes as they are string . this comment is too long now  
@@ -88,9 +88,10 @@ def move_display(filtered_list): #plug in the list from previous function to all
     pprint(movelist)
 
 def layerFilter(extralist): #plug in the returned list from previous filter. FILTERING A NEWLY RETURNED LIST 
-    option = input(f"{pretty_print(SUBMENU)}") #move inside while?
+    option = input(f"{pretty_print(SUBMENU)}")
     print("0 to stop filter")
-    if extralist.len() > 1:
+    try: 
+        option = int(option)
         while option != 0: #this if is so the filtering keeps prompting until one pokemon left 
             try:
                 option = int(option)
@@ -197,9 +198,12 @@ def layerFilter(extralist): #plug in the returned list from previous filter. FIL
                     elif option == 0:
                         break
             except ValueError:
-                print("not a valid selection")           
-    else:
-        print("only 1 pokemon left")
+                print("not a valid selection")
+        else:
+            print("only 1 pokemon left")        
+    except ValueError:
+            print("not a valid selection")
+
 def moveToAdd():
     user_input = input("enter the name of the pokemon you want to add")
     matches = []

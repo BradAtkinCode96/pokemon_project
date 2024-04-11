@@ -6,13 +6,6 @@ Filter the JSON by any combination of: type, speed range, height range, weight r
 
 type, speed range, height range, weight range, HP range
 
-height_range = []
-threshold = input
-for user in users_data:
-    if user["plan_type"] == "basic" and user["data_usage"] > threshold:
-        basic_high_usage.append(user)
-print(basic_high_usage)
-
 
 
         
