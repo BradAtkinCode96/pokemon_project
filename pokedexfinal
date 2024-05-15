@@ -9,6 +9,7 @@ MENU = ["Search by Name",
         "Search by ID",
         "Filter by Height, Weight and Speed",
         "Select Pokemon for your team",
+        "View your team"
         ]
 
 def pretty_print(lst):
@@ -41,7 +42,10 @@ def name_search():
                 pprint.pp(match)
             print("Here are the matches:")
             print(match["Name"])
-
+            if len(matches) == 1:
+                print("There is only pokemon that matches you search:")
+                print(matches[0]["Name"])
+                return matches
         else:
             print("No Pokémon found with that name.")
     except Exception as e:
@@ -69,9 +73,9 @@ def get_min_max():
 
     except ValueError:
         print("MUst be a valid number")    
-    return smin, smax, hmin, hmax, wmin, wmax 
+    return hmin, hmax, wmin, wmax, smin, smax 
 
-def filter_by_range(mylist, smin, smax, hmin, hmax, wmin, wmax):
+def filter_by_range(mylist, hmin, hmax, wmin, wmax, smin, smax):
     result = []
     for pokemon in mylist: 
         height = float(pokemon.get("Height (m)", 0))
@@ -85,6 +89,7 @@ def filter_by_range(mylist, smin, smax, hmin, hmax, wmin, wmax):
         print(i["Name"])
         print()
     return result
+
 def move_display(alist): #plug in the list from previous function to allow move selection
     movelist = []
     for pokemon in alist:
@@ -93,7 +98,24 @@ def move_display(alist): #plug in the list from previous function to allow move 
 
 def add_to_team():
     p = input("Which pokemon would you like to add to your team?: ")
-    
+    match = name_search()
+    if len(match) == 1:
+        x = input(f"Would you like to add {p} to your team? y/n: ")
+        try:
+            if x == "Y" or "y":
+                #moves = move_selection()
+                json_write(match)
+                print(f"{p} was added to your team!")
+                
+            elif x == "N" or "n":
+                return True
+        except Exception as e:
+            print(f"An error occurred: {e}")
+
+def json_write(lst):
+    with open(r'C:\Users\brada\OneDrive\Documents\GitHub\pokemon_project\team.json', 'w') as json_file:
+        json.dump(lst, json_file)
+
 
 print("Welcome to the Pokédex")
 while True:
@@ -105,7 +127,8 @@ while True:
         elif choice == 2:
             id_search()
         elif choice == 3:
-            filter_by_range(mylist, get_min_max())
+            hmin, hmax, wmin, wmax, smin, smax = get_min_max()
+            filter_by_range(mylist, hmin, hmax, wmin, wmax, smin, smax)
         elif choice == 4:
             add_to_team()
         elif choice == 0:
