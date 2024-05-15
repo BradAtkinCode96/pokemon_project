@@ -33,21 +33,35 @@ def name_search():
     except Exception as e:
         print(f"An error occurred: {e}")
 
-print("Welcome to the Pokédex")
-MENU = ["Search by name", "Search by ID"]
+def filter_by_type(mylist, type_to_filter):
+    filtered_pokemon = []
+    for pokemon in mylist:
+        try:
+            if pokemon["Type 1"].lower() == type_to_filter.lower() or pokemon["Type 2"].lower() == type_to_filter.lower():
+                filtered_pokemon.append(pokemon)
+        except ValueError:
+            print("valid selection please")
+    print(filtered_pokemon)
+    return filtered_pokemon
 
-while True:
+def get_min_max():
     try:
-        print(MENU)
-        choice = int(input("Please make a selection (0 to quit): "))
-        if choice == 1:
-            name_search()
-        elif choice == 2:
-            id_search()
-        elif choice == 0:
-            print("Goodbye!")
-            break
-        else:
-            print("Invalid choice. Please choose a number between 0 and 2.")
+        smin = float(input("Smin"))
+        smax = float(input("samx"))
+        hmin = float(input("hmin"))
+        hmax = float(input("hmax"))
+        wmin = float(input("wmin"))
+        wmax = float(input("wmax"))
     except ValueError:
-        print("Invalid choice. Please enter a number.")
+        print("MUst be a valid number")    
+    return smin, smax, hmin, hmax, wmin, wmax 
+
+def filter_by_range(mylist, smin, smax, hmin, hmax, wmin, wmax):
+    result = []
+    for pokemon in mylist: 
+        height = float(pokemon.get("Height (m)", 0))
+        weight = float(pokemon.get("Weight (kg)", 0))
+        speed = float(pokemon.get("Speed", 0))
+        if (smin <= speed <= smax and hmin <= height <= hmax and wmin <= weight <= wmax): 
+            result.append(pokemon)
+    print(result)

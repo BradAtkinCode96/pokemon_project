@@ -1,0 +1,117 @@
+import json
+with open(r"C:\Users\brada\OneDrive\Documents\GitHub\pokemon_project\pokedex.json") as file:
+    json_data = file.read()
+    mylist = json.loads(json_data)
+
+import pprint
+
+MENU = ["Search by Name",
+        "Search by ID",
+        "Filter by Height, Weight and Speed",
+        "Select Pokemon for your team",
+        ]
+
+def pretty_print(lst):
+    print("\n")
+    for i in range(len(lst)):
+        print(f"{i+1}. {lst[i]}")
+
+def id_search():
+    try:
+        user_input = input("Enter the ID of the Pokémon: ")
+        for pokemon in mylist:
+            if pokemon["Id"] == user_input:
+                print("Here is the match:")
+                print(pokemon)
+                return pokemon
+        print("No Pokémon found with that ID.")
+    except ValueError:
+        print("Please enter a valid ID.")
+
+def name_search():
+    try:
+        user_input = input("Enter the name of the Pokémon: ")
+        matches = []
+        for pokemon in mylist:
+            if user_input.lower() in (pokemon["Name"].lower()):
+                matches.append(pokemon)
+        if matches:
+            print("Here are the matches:")
+            for match in matches:
+                pprint.pp(match)
+            print("Here are the matches:")
+            print(match["Name"])
+
+        else:
+            print("No Pokémon found with that name.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+def filter_by_type(mylist, type_to_filter):
+    result = []
+    for pokemon in mylist:
+        try:
+            if pokemon["Type 1"].lower() == type_to_filter.lower() or pokemon["Type 2"].lower() == type_to_filter.lower():
+                result.append(pokemon)
+        except ValueError:
+            print("valid selection please")
+    print(result)
+    return result
+
+def get_min_max():
+    try:
+        hmin = float(input("Enter minimum Height: "))
+        hmax = float(input("Enter maximum Height: "))
+        wmin = float(input("Enter minimum Weight: "))
+        wmax = float(input("Enter maximum Weight: "))
+        smin = float(input("Enter minimum Speed: "))
+        smax = float(input("Enter maximum Speed: "))
+
+    except ValueError:
+        print("MUst be a valid number")    
+    return smin, smax, hmin, hmax, wmin, wmax 
+
+def filter_by_range(mylist, smin, smax, hmin, hmax, wmin, wmax):
+    result = []
+    for pokemon in mylist: 
+        height = float(pokemon.get("Height (m)", 0))
+        weight = float(pokemon.get("Weight (kg)", 0))
+        speed = float(pokemon.get("Speed", 0))
+        # print(speed, height, weight)
+        if (smin <= speed <= smax and hmin <= height <= hmax and wmin <= weight <= wmax): 
+            result.append(pokemon)
+    pprint.pp(result)
+    for i in result:
+        print(i["Name"])
+        print()
+    return result
+def move_display(alist): #plug in the list from previous function to allow move selection
+    movelist = []
+    for pokemon in alist:
+        movelist.append(pokemon["Name"]["Moves"])
+    pprint(movelist)
+
+def add_to_team():
+    p = input("Which pokemon would you like to add to your team?: ")
+    
+
+print("Welcome to the Pokédex")
+while True:
+    try:
+        pretty_print(MENU)
+        choice = int(input("Please make a selection (0 to quit): "))
+        if choice == 1:
+            name_search()
+        elif choice == 2:
+            id_search()
+        elif choice == 3:
+            filter_by_range(mylist, get_min_max())
+        elif choice == 4:
+            add_to_team()
+        elif choice == 0:
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please choose a number between 0 and 2.")
+    except ValueError:
+        print("Invalid choice. Please enter a number.")
