@@ -105,8 +105,7 @@ def add_to_team():
             if x == "Y" or "y":
                 #moves = move_selection()
                 json_write(match)
-                print(f"{p} was added to your team!")
-                
+                print(f"{p} was added to your team!")   
             elif x == "N" or "n":
                 return True
         except Exception as e:
@@ -116,6 +115,16 @@ def json_write(lst):
     with open(r'C:\Users\brada\OneDrive\Documents\GitHub\pokemon_project\team.json', 'w') as json_file:
         json.dump(lst, json_file)
 
+def team_view():
+    with open(r'C:\Users\brada\OneDrive\Documents\GitHub\pokemon_project\team.json', 'w') as json_file:
+        y = json.loads(json_file)
+        pprint(y)
+
+def team_clear():
+    with open(r'C:\Users\brada\OneDrive\Documents\GitHub\pokemon_project\team.json', 'w') as json_file:
+        y = json.loads(json_file)
+        y.clear()
+        print("Your team is now empty!")
 
 print("Welcome to the Pokédex")
 while True:
