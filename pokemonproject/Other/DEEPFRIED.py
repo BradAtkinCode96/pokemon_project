@@ -1,15 +1,19 @@
+
 import json
 
 with open(r"C:\Users\Bradl\Documents\GitHub\PokemonProject\pokemonproject\shrtpokedex.json") as file:
     json_data = file.read()
     mylist = json.loads(json_data)
 
+import pprint #-> this does work!
+pp = pprint.PrettyPrinter(indent=0) 
+
 MENU = ["Search by Name",
         "Search by Id",
         "Filter by Type",
         "Filter by Speed Range",
         "Filter by Weight Range",
-        "Filter by Height Range",
+        "Filter by Height (m) Range",
         "Filter by HP Range"]
 
 SUBMENU = ["Would you like to filter further?",
@@ -26,19 +30,13 @@ def pretty_print(lst):
     for i in range(len(lst)):
         print(f"{i+1}. {lst[i]}")
 
-def valid_types():
-    values = []
-    for pokemon in mylist:
-        values.append(pokemon["Type 1"]) and values.append(pokemon["Type 2"])
-    pretty_print(values)
-
 def id_search(): 
     user_input = input("Enter the id of the Pokémon: ")
     id_out = [] 
     for pokemon in mylist: 
         if pokemon["Id"] == user_input:
-            id_out.append(pokemon["Name"])
-    pretty_print(id_out)
+            id_out.append(pokemon)
+    pprint(id_out)
 
 def filter_by_type(type_to_filter):
     filtered_pokemon = []
@@ -48,59 +46,55 @@ def filter_by_type(type_to_filter):
                 filtered_pokemon.append(pokemon["Name"])
         except ValueError:
             print("valid selection please")
-    pretty_print(filtered_pokemon)
+    pprint(filtered_pokemon)
 
 def name_search(): 
     user_input = input("Enter the name of the Pokémon: ") 
     matches = []
     for pokemon in mylist: 
         if user_input.lower() in pokemon["Name"].lower():
-            matches.append(pokemon["Name"])
-    print(matches)
+            matches.append(pokemon)
+    pprint.pp(matches)
 
-def filter_range(attribute_name, unit): #when calling, atribute and unit should be in quptes as they are string    
+def filter_range(attribute_name, unit): # reutrns filterd lst of d. when calling, atribute and unit should be in quptes as they are string    
     min_val = input(f"Enter the minimum {attribute_name}: ") #f and curly brackets lets me print the interchagable variable
     max_val = input(f"Enter the maximum {attribute_name}: ")
     try:
+        namelist = []
         filtered_pokemon = []
         min_val = float(min_val)
         max_val = float(max_val)
         for pokemon in mylist: 
             if min_val <= float(pokemon[f"{unit}"]) <= max_val: #there is a speical case here for feet because the feet and inches cannot be converted to a float
-                filtered_pokemon.append(pokemon["Name"])
-        pretty_print(filtered_pokemon)
+                namelist.append(pokemon["Name"]) #list of names (just for printing and ease of reading)
+                filtered_pokemon.append(pokemon) #list of all filtered pokemons dictionaries
+        pretty_print(namelist)
+        return filtered_pokemon
     except ValueError:
         print("Must be an integer")
-def id_search(): 
-    user_input = input("Enter the id of the Pokémon: ")
-    id_out = [] 
-    for pokemon in mylist: 
-        if pokemon["Id"] == user_input:
-            id_out.append(pokemon["Name"])
-    pretty_print(id_out)
 
-def filter_choice(attribute_name, unit1, unit2): #refactored to get any values
-    choice = input(f"What do you want to filter {attribute_name} by?\n"
-                   f"1. Filter by {unit1}\n"
-                   f"2. Filter by {unit2}\n"
-                   "Your choice: \n")
-    try:
-        choice = int(choice)
-        if choice == 1:
-            filter_range(f"{attribute_name}",f"{unit1}")
-            # return 1
-        elif choice == 2:
-            filter_range(f"{attribute_name}",f"{unit2}")
-            # return 2
-    except ValueError:
-        print("Choice must be a number")
+def move_display(filtered_list): #plug in the list from previous function to allow move selection
+    movelist = []
+    for pokemon in filtered_list:
+        movelist.append(pokemon["Name"]["Moves"])
+    pprint(movelist)
 
-# def filter_type(): #i have the filter for the list but don't know how to not hardcode the choice of the category to filter by
-    # user_input = input("Enter the type of the Pokémon: ")    
-    # filterlist = []
-    # for pokemon in mylist: 
-    #     if pokemon["Type 1"].lower() == user_input.lower():
-    #         filterlist.append(pokemon)
+def layerFilter(extralist): #plug in the returned list from previous filter
+    print("Do you want to filter further?")
+    option = input(f"{pretty_print(SUBMENU)}")
+    if option != 0:
+        if option == 1:
+            type_to_filter = input("Enter the type to search:")
+            dlayerfilter = []
+            layerfilter = []
+    for pokemon in extralist:
+        try:
+            if pokemon["Type 1"].lower() == type_to_filter.lower() or pokemon["Type 2"].lower() == type_to_filter.lower():
+                layerFilter.append(pokemon["Name"])
+                dlayerfilter.append(pokemon)
+        except ValueError:
+            print("valid selection please")
+    pprint(layerfilter)
 
 print("Welcome to the pokedex")
 choice = None
@@ -132,8 +126,8 @@ while choice != 0:
             except ValueError:
                 print("You must select a number")
         elif choice == 6: #height
-            filter_choice("Height", "Height (m)", "Height (ft)")
-        elif choice == 7: #height
+                    filter_range("Height", "Height (m)")
+        elif choice == 7: #HP
             filter_range("HP", "HP")
         elif choice == 8:
             print("Exiting...")    
