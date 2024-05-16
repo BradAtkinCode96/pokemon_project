@@ -1,3 +1,4 @@
+
 import json
 
 with open(r"C:\Users\Bradl\Documents\GitHub\PokemonProject\pokemonproject\shrtpokedex.json") as file:
