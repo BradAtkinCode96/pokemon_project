@@ -40,12 +40,13 @@ def name_search(user_input):
             print("Here are the matches:")
             for match in matches:
                 pprint.pp(match)
-            print("Here are the matches:")
-            print(match["Name"])
             if len(matches) == 1:
                 print("There is only pokemon that matches you search:")
                 print(matches[0]["Name"])
                 return matches
+            else:
+                print("Here are the matches:")
+                print(match["Name"])
         else:
             print("No Pokémon found with that name.")
     except Exception as e:
@@ -91,20 +92,20 @@ def filter_by_range(mylist, hmin, hmax, wmin, wmax, smin, smax):
     return result
 
 def move_display(alist): #plug in the list from previous function to allow move selection
-    movelist = []
-    fullmoves = []
+    fullmoves = [] #fullmoves[0] is the name. Fullmoves[2]["Description"]
     for pokemon in alist:
         x = pokemon["Moves"] #access the moves dictionary(which is a dictionary)
         for i in x.items():
-            y = i[0]
-            movelist.append(y)
-            fullmoves.append(i)
-            for i, item in y:
-                print(f"{i+1}{item}")
-            # pprint.pp(y)
+            y = i[0] #move name
+            z = i[1]["Description"] 
+            fullmoves.append(i) #
+            print(f"{y}: {z}") # maybe don't print yet?
+    return fullmoves
 
-
-    print(movelist)
+def move_choice(fullmoves):
+    
+    user_moves = input("Which moves would you like to add? (4 numbers space separated)")
+    
 
 def add_to_team():
     p = input("Which pokemon would you like to add to your team?: ")
@@ -113,9 +114,8 @@ def add_to_team():
         x = input(f"Would you like to add {p} to your team? y/n: ")
         try:
             if x == "Y" or "y":
-                #moves = move_selection()
-                json_write(match)
-                print(f"{p} was added to your team!")   
+                moves = move_display(match)
+                print(moves)
             elif x == "N" or "n":
                 return True
         except Exception as e:
@@ -168,7 +168,8 @@ while True:
             team_clear()
         elif choice == 7:
             # x = input("Pokemon")
-            move_display(mylist)
+            move_display(mylist) # x= move_display(mylist)
+                                 # move_choice(x)
         elif choice == 0:
             print("Goodbye!")            
             break
