@@ -1,5 +1,5 @@
 import json
-with open(r"C:\Users\brada\OneDrive\Documents\GitHub\pokemon_project\pokedex.json") as file:
+with open(r"C:\Users\brada\OneDrive\Documents\GitHub\pokemon_project\dataset.json") as file:
     mylist = json.load(file)
 
 import pprint
@@ -32,7 +32,6 @@ def id_search():
 
 def name_search(user_input):
     try:
-        # user_input = input("Enter the name of the Pokémon: ")
         matches = []
         for pokemon in mylist:
             if user_input.lower() in (pokemon["Name"].lower()):
@@ -160,7 +159,7 @@ def team_clear():
             json.dump(y, json_file)
         except Exception:
             print("Your team is now empty!")
-    # print("Your team is now empty!")
+
 
 print("Welcome to the Pokédex")
 while True:
