@@ -92,20 +92,34 @@ def filter_by_range(mylist, hmin, hmax, wmin, wmax, smin, smax):
     return result
 
 def move_display(alist): #plug in the list from previous function to allow move selection
-    fullmoves = [] #fullmoves[0] is the name. Fullmoves[2]["Description"]
+    fullmoves = [] #fullmoves[0] is the name. Fullmoves[1]is the dictionary key with value["Description"]
     for pokemon in alist:
-        x = pokemon["Moves"] #access the moves dictionary(which is a dictionary)
+        x = pokemon["Moves"] #access the moves key(which is has a dictionary key)
         for i in x.items():
-            y = i[0] #move name
-            z = i[1]["Description"] 
+            # y = i[0] #move name
+            # z = i[1]["Description"] #move description
             fullmoves.append(i) #
-            print(f"{y}: {z}") # maybe don't print yet?
+        # for i in range(len(fullmoves)): ###move choice starts here
+        #     print(f"{i+1}. {y}: {z}")
+        # select = int(input("Which moves would you like? (4 moves space-separated): ").split())
+        # print(select)
+        # for i in select:
+        #     if i == 
     return fullmoves
 
 def move_choice(fullmoves):
-    
-    user_moves = input("Which moves would you like to add? (4 numbers space separated)")
-    
+    for pokemon in fullmoves:
+        x = pokemon["Moves"] #access the moves key(which is has a dictionary key)
+        for i in x.items():
+            y = i[0] #move name
+            z = i[1]["Description"] #move description
+    for i in range(len(fullmoves)):
+        print(f"{i+1}. {y}: {z}")
+    select = int(input("Which moves would you like? (4 numbers space-separated): ").split())
+    print(select)
+    for i in select:
+        if i == 1
+
 
 def add_to_team():
     p = input("Which pokemon would you like to add to your team?: ")
