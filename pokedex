@@ -40,16 +40,20 @@ def name_search(user_input):
             if matches:
                 if len(matches) == 1:
                     pprint.pp(matches)
-                    print("There is only pokemon that matches your search: ^Details above^")
+                    print("There is only 1 pokemon that matches your search: ^Details above^")
                     print(matches[0]["Name"])
                     return matches
                 elif 0 <= len(matches) <= 5:
                     print("Here are the matches:")
                     pprint.pp(matches)
-                    break  #retrun false to escape loop and go back to main menu
+                    print(f"There are {len(matches)} pokemon that match your search:")
+                    print(matches[0]["Name"])
+                    break  #escape loop and go back to main menu (not adding multiple pokemon, yet.)
                 elif 5 <= len(matches):
                     print("Here are the matches:")
                     pprint.pp(matches)
+                    print(f"There are {len(matches)} pokemon that match your search:")
+                    print(matches[0]["Name"])
                     break
 
             else:
@@ -122,9 +126,8 @@ def move_display(alist): #plug in the list from previous function to allow move 
 
 
 
-def add_to_team(p):
+def add_to_team(match):
     while True:
-        match = name_search(p)
         if len(match) == 1:
             x = input(f"Would you like to add {p} to your team? y/n: ").lower()
             try:
@@ -134,6 +137,7 @@ def add_to_team(p):
                     print(f"{p} was not added to your team")
                     return False
                 elif x != "y" or x != "n":
+                    print("You did not make a valid selection")
                     continue
             except Exception as e:
                 print(f"An error occurred: {e}")
@@ -180,7 +184,8 @@ while True:
             filter_by_range(mylist, hmin, hmax, wmin, wmax, smin, smax)
         elif choice == 4:
             p = input("Which pokemon would you like to add to your team?: ")
-            add_to_team(p)
+            o = name_search(p)
+            add_to_team(o)
             if p is False:
                 continue
             else:        
