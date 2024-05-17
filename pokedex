@@ -183,10 +183,10 @@ while True:
             hmin, hmax, wmin, wmax, smin, smax = get_min_max()
             filter_by_range(mylist, hmin, hmax, wmin, wmax, smin, smax)
         elif choice == 4:
-            p = input("Which pokemon would you like to add to your team?: ")
-            o = name_search(p)
-            add_to_team(o)
-            if p is False:
+            pokename = input("Which pokemon would you like to add to your team?: ")
+            matchlist = name_search(pokename)
+            want_to_add = add_to_team(matchlist)
+            if want_to_add == False:
                 continue
             else:        
                 activemoves = move_display(p)
