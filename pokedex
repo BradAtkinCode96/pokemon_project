@@ -39,6 +39,7 @@ def name_search(user_input):
                     matches.append(pokemon)
             if matches:
                 if len(matches) == 1:
+                    pprint.pp(matches)
                     print("There is only pokemon that matches your search:")
                     print(matches[0]["Name"])
                     return matches
