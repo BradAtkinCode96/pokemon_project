@@ -148,7 +148,7 @@ def add_to_team(match:list):
         else: 
             print("More than one pokemon matches that search!")
 
-def json_write(lst):
+def json_write(lst:dict):
     with open(r'C:\Users\brada\OneDrive\Documents\GitHub\pokemon_project\team.json', 'r') as json_file:
         try:    
             x = json.load(json_file)
