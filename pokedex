@@ -100,10 +100,11 @@ def filter_by_range(mylist, hmin, hmax, wmin, wmax, smin, smax):
         print()
     return result
 
-def move_display(alist): #plug in the list from previous function to allow move selection
+def move_display(alist): #plug in the list from previous function to allow move selection(one pokemon)
     fullmoves = [] #fullmoves[0] is the name. Fullmoves[1]is the dictionary key with value["Description"]etc
     counter = 1
-    print("Here are the pokemon's moves: ") # find a way to concatenate pokemon name
+    name = alist[0]["Name"]
+    print(f"Here are {name}'s moves: ") # find a way to concatenate pokemon name
     for pokemon in alist:
         moves_dict = pokemon["Moves"] #access the moves key(which is has a dictionary value)
         for i in moves_dict.items():
@@ -114,27 +115,30 @@ def move_display(alist): #plug in the list from previous function to allow move 
             counter += 1
     select = input("Which moves would you like? (4 numbers space-separated): ").split()
     intselect = list(map(int, select))
-    move_choices = []
+    active_moves = []
     active_move_pokemon = {}
     for i in intselect:
-        move_choices.append(fullmoves[i-1])
-    print(move_choices)
+        active_moves.append(fullmoves[i-1]) #adds the moves to active move list in 
+    for move_name, _ in active_moves:
+        print(move_name)
     name = alist[0]["Name"]
-    active_move_pokemon[name] = move_choices
+    active_move_pokemon[name] = active_moves
     pprint.pp(active_move_pokemon)
+    print(f"{name} was added with the moves you selected")
     return active_move_pokemon
 
 
 
-def add_to_team(match):
+def add_to_team(match:list):
     while True:
         if len(match) == 1:
-            x = input(f"Would you like to add {p} to your team? y/n: ").lower()
+            name = match[0]["Name"]
+            x = input(f"Would you like to add {name} to your team? y/n: ").lower()
             try:
                 if x == "y":
                     return match
                 elif x == "n":
-                    print(f"{p} was not added to your team")
+                    print(f"{name} was not added to your team")
                     return False
                 elif x != "y" or x != "n":
                     print("You did not make a valid selection")
@@ -189,7 +193,7 @@ while True:
             if want_to_add == False:
                 continue
             else:        
-                activemoves = move_display(p)
+                activemoves = move_display(want_to_add)
                 json_write(activemoves)
         elif choice == 5:
             team_view()
