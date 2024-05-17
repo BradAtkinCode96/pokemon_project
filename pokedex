@@ -123,9 +123,9 @@ def add_to_team():
     if len(match) == 1:
         x = input(f"Would you like to add {p} to your team? y/n: ")
         try:
-            if x == "Y" or "y":
+            if x == "Y" or x == "y":
                 return match
-            elif x == "N" or "n":
+            elif x == "N" or x == "n":
                 return True
         except Exception as e:
             print(f"An error occurred: {e}")
