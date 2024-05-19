@@ -96,7 +96,7 @@ def get_min_max():
         print("MUst be a valid number")    
     return hmin, hmax, wmin, wmax, smin, smax 
 '''
-Finds the pokemon that match the min and max values retrived by input through get_min_max()
+Finds the pokemon that match the min and max values retrived by input through get_min_max().
 '''
 def filter_by_range(mylist, hmin, hmax, wmin, wmax, smin, smax):
     result = []
