@@ -1,5 +1,5 @@
 import json
-with open(r"C:\Users\brada\OneDrive\Documents\GitHub\pokemon_project\dataset.json") as file:
+with open(r"C:\Users\Bradl\OneDrive\Documents\GitHub\PokemonProject\dataset.json") as file:
     mylist = json.load(file)
 
 import pprint
@@ -30,7 +30,8 @@ def id_search():
                 print("Here is the match:")
                 print(pokemon)
                 return pokemon
-        print("No Pokémon found with that ID.")
+        else:
+            print("No Pokémon found with that ID.")
     except ValueError:
         print("Please enter a valid ID.")
 # """
@@ -38,35 +39,33 @@ def id_search():
 #  if only one pokemon is a match for the query, the pokemon will be printed and returned (for use in the move_display()).
 # if more, a list of pokemon name will printed and the number of matches.
 def name_search(user_input):
-    while True:
-        try:
-            matches = []
-            for pokemon in mylist:
-                if user_input.lower() in (pokemon["Name"].lower()):
-                    matches.append(pokemon)
-            if matches:
-                if len(matches) == 1:
-                    pprint.pp(matches)
-                    print("There is only 1 pokemon that matches your search: ^Details above^")
-                    print(matches[0]["Name"])
-                    return matches
-                elif 0 <= len(matches) <= 5:
-                    print("Here are the matches:")
-                    pprint.pp(matches)
-                    print(f"There are {len(matches)} pokemon that match your search:")
-                    print(matches[0]["Name"])
-                    break  #escape loop and go back to main menu (not adding multiple pokemon, yet.)
-                elif 5 <= len(matches):
-                    print("Here are the matches:")
-                    pprint.pp(matches)
-                    print(f"There are {len(matches)} pokemon that match your search:")
-                    print(matches[0]["Name"])
-                    print(f"There are {len(matches)} pokemon that match your search:")
-                    break
-            else:
-                print("No Pokémon found with that name.")
-        except Exception as e:
-            print(f"An error occurred: {e}")
+    try:
+        matches = []
+        for pokemon in mylist:
+            if user_input.lower() in (pokemon["Name"].lower()):
+                matches.append(pokemon)
+        if matches:
+            if len(matches) == 1:
+                pprint.pp(matches)
+                print("There is only 1 pokemon that matches your search: ^Details above^")
+                print(matches[0]["Name"])
+                return matches
+            elif 0 <= len(matches) <= 5:
+                print("Here are the matches:")
+                pprint.pp(matches)
+                print(f"There are {len(matches)} pokemon that match your search:")
+                print(matches[0]["Name"])
+                  #escape loop and go back to main menu (not adding multiple pokemon, yet.)
+            elif 5 <= len(matches):
+                print("Here are the matches:")
+                pprint.pp(matches)
+                print(f"There are {len(matches)} pokemon that match your search:")
+                print(matches[0]["Name"])
+                print(f"There are {len(matches)} pokemon that match your search:")
+        else:
+            print("No Pokémon found with that name.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
 # """
 # Takes input for a type of pokemon and returns a pokemon matching the type
 # """
@@ -76,6 +75,8 @@ def filter_by_type(mylist, type_to_filter):
         try:
             if pokemon["Type 1"].lower() == type_to_filter.lower() or pokemon["Type 2"].lower() == type_to_filter.lower():
                 result.append(pokemon)
+            else:
+                print("No")
         except ValueError:
             print("valid selection please")
     print(result)
