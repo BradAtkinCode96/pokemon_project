@@ -1,5 +1,5 @@
 import json
-with open(r"C:\Users\brada\OneDrive\Documents\GitHub\pokemon_project\dataset.json") as file:
+with open(r"C:\Users\Bradl\OneDrive\Documents\GitHub\PokemonProject\dataset.json") as file:
     mylist = json.load(file)
 
 import pprint
@@ -12,12 +12,16 @@ MENU = ["Search by Name",
         "Clear the Team",
         "Show all move in Pokedex(Across all pokemon)"
         ]
-
+# """
+# For pretty printing the menu with number options
+# """
 def pretty_print(lst):
     print("\n")
     for i in range(len(lst)):
         print(f"{i+1}. {lst[i]}")
-
+# """
+# Searches for exact match poke with ID
+# """ 
 def id_search():
     try:
         user_input = input("Enter the ID of the Pokémon: ")
@@ -26,52 +30,60 @@ def id_search():
                 print("Here is the match:")
                 print(pokemon)
                 return pokemon
-        print("No Pokémon found with that ID.")
+        else:
+            print("No Pokémon found with that ID.")
     except ValueError:
         print("Please enter a valid ID.")
-
+# """
+# Searches for partial match of search query, 
+#  if only one pokemon is a match for the query, the pokemon will be printed and returned (for use in the move_display()).
+# if more, a list of pokemon name will printed and the number of matches.
 def name_search(user_input):
-    while True:
-        try:
-            matches = []
-            for pokemon in mylist:
-                if user_input.lower() in (pokemon["Name"].lower()):
-                    matches.append(pokemon)
-            if matches:
-                if len(matches) == 1:
-                    pprint.pp(matches)
-                    print("There is only 1 pokemon that matches your search: ^Details above^")
-                    print(matches[0]["Name"])
-                    return matches
-                elif 0 <= len(matches) <= 5:
-                    print("Here are the matches:")
-                    pprint.pp(matches)
-                    print(f"There are {len(matches)} pokemon that match your search:")
-                    print(matches[0]["Name"])
-                    break  #escape loop and go back to main menu (not adding multiple pokemon, yet.)
-                elif 5 <= len(matches):
-                    print("Here are the matches:")
-                    pprint.pp(matches)
-                    print(f"There are {len(matches)} pokemon that match your search:")
-                    print(matches[0]["Name"])
-                    break
-
-            else:
-                print("No Pokémon found with that name.")
-        except Exception as e:
-            print(f"An error occurred: {e}")
-
+    try:
+        matches = []
+        for pokemon in mylist:
+            if user_input.lower() in (pokemon["Name"].lower()):
+                matches.append(pokemon)
+        if matches:
+            if len(matches) == 1:
+                pprint.pp(matches)
+                print("There is only 1 pokemon that matches your search: ^Details above^")
+                print(matches[0]["Name"])
+                return matches
+            elif 0 <= len(matches) <= 5:
+                print("Here are the matches:")
+                pprint.pp(matches)
+                print(f"There are {len(matches)} pokemon that match your search:")
+                print(matches[0]["Name"])
+                  #escape loop and go back to main menu (not adding multiple pokemon, yet.)
+            elif 5 <= len(matches):
+                print("Here are the matches:")
+                pprint.pp(matches)
+                print(f"There are {len(matches)} pokemon that match your search:")
+                print(matches[0]["Name"])
+                print(f"There are {len(matches)} pokemon that match your search:")
+        else:
+            print("No Pokémon found with that name.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+# """
+# Takes input for a type of pokemon and returns a pokemon matching the type
+# """
 def filter_by_type(mylist, type_to_filter):
     result = []
     for pokemon in mylist:
         try:
             if pokemon["Type 1"].lower() == type_to_filter.lower() or pokemon["Type 2"].lower() == type_to_filter.lower():
                 result.append(pokemon)
+            else:
+                print("No")
         except ValueError:
             print("valid selection please")
     print(result)
     return result
-
+"""
+Retrieves the min max values for all the search criteria for filter_by_range()
+"""
 def get_min_max():
     try:
         hmin = float(input("Enter minimum Height: "))
@@ -84,7 +96,9 @@ def get_min_max():
     except ValueError:
         print("MUst be a valid number")    
     return hmin, hmax, wmin, wmax, smin, smax 
-
+'''
+Finds the pokemon that match the min and max values retrived by input through get_min_max().
+'''
 def filter_by_range(mylist, hmin, hmax, wmin, wmax, smin, smax):
     result = []
     for pokemon in mylist: 
@@ -99,7 +113,13 @@ def filter_by_range(mylist, hmin, hmax, wmin, wmax, smin, smax):
         print(i["Name"])
         print()
     return result
-
+"""
+***Needs refactoring and error catching***
+currently: plugs in a list containing all info about ONE poekmon (retrieved when only 1 match in )
+            function then extracts and prints those moves for selection by user input
+            store the input in a list and makes a new list according to the moves selected
+            appends those moves to the pokemon and reutrn the pokemon with 4 active movees
+"""
 def move_display(alist): #plug in the list from previous function to allow move selection(one pokemon)
     fullmoves = [] #fullmoves[0] is the name. Fullmoves[1]is the dictionary key with value["Description"]etc
     counter = 1
@@ -128,7 +148,10 @@ def move_display(alist): #plug in the list from previous function to allow move 
     return active_move_pokemon
 
 
-
+"""
+Takes input of ONE pokemon's information and asks if that pokemon shoud be added
+if not, returns to main menu
+"""
 def add_to_team(match:list):
     while True:
         if len(match) == 1:
@@ -147,8 +170,10 @@ def add_to_team(match:list):
                 print(f"An error occurred: {e}")
         else: 
             print("More than one pokemon matches that search!")
-
-def json_write(lst:dict):
+"""
+Writes a list to a json. The json contians the team.
+"""
+def json_write(lst):
     with open(r'C:\Users\brada\OneDrive\Documents\GitHub\pokemon_project\team.json', 'r') as json_file:
         try:    
             x = json.load(json_file)
@@ -159,7 +184,9 @@ def json_write(lst:dict):
             json.dump(x, json_file)
 
 
-
+"""
+View the team contained in the json. 
+"""
 def team_view():
     with open(r'C:\Users\brada\OneDrive\Documents\GitHub\pokemon_project\team.json', 'r') as json_file:
         try:
@@ -167,12 +194,16 @@ def team_view():
             pprint.pp(y)
         except Exception:
             print("Your team is empty!")
-
+"""
+Empties the team contained in the json file
+"""
 def team_clear():
     with open(r'C:\Users\brada\OneDrive\Documents\GitHub\pokemon_project\team.json', 'w') as json_file:
         print("Your team is now empty")
 
-
+"""
+Main menu
+"""
 print("Welcome to the Pokédex")
 while True:
     try:
