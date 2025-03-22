@@ -32,19 +32,39 @@ def id_search():
             print("No Pokémon found with that ID.")
     except ValueError:
         print("Please enter a valid ID.")
+    """
+    Extracting of fuzzy matches
+    """
+def fuzzy_extract(query, pokedex, threshold=95):
+    matches = []
+    for pokemon in pokedex:
+        pokemonName = pokemon["Name"]
+        fuzzScore = fuzz.partial_ratio(query.lower(), pokemonName.lower())
+        if fuzzScore >= threshold:
+            matches.append(pokemon)
+    return matches
 '''
 Linear search for fuzzy match
 '''
-def name_search(user_input):
+def name_search():
     try:
-        matches = []
-        for pokemon in mylist:
-            if user_input.lower() in (pokemon["Name"].lower()):
-                matches.append(pokemon)
+        query = input("Enter the name of the Pokémon: ")
+        matches = fuzzy_extract(query, mylist)
+        if len(matches) == 1:
+            for i in range(len(matches)):
+                name = matches[i]["Name"]
+                print(name)
+        elif len(matches) > 1:
+            print("more than 1 pokemon matches that name")
+            # print(matches)
+            for i in range(len(matches)):
+                name = matches[i]["Name"]
+                print(name)
         else:
             print("No Pokémon found with that name.")
     except Exception as e:
         print(f"An error occurred: {e}")
+
 # """
 # Takes input for a type of pokemon and returns a pokemon matching the type
 # """
@@ -102,8 +122,7 @@ while True:
         pretty_print(MENU)
         choice = int(input("Please make a selection (0 to quit): "))
         if choice == 1:
-            user_input = input("Enter the name of the Pokémon: ")
-            name_search(user_input)
+            name_search()
         elif choice == 2:
             id_search()
         elif choice == 3:

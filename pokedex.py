@@ -176,12 +176,12 @@ Writes a list to a json. The json contians the team.
 def json_write(lst):
     with open(r'/team.json', 'r') as json_file:
         try:    
-            x = json.load(json_file)
-        except (FileNotFoundError, json.JSONDecodeError):
+            x = ujson.load(json_file)
+        except (FileNotFoundError, ujson.JSONDecodeError):
             x = []
         x.append(lst)
         with open(r'C:\Users\brada\OneDrive\Documents\GitHub\pokemon_project\team.json', 'w') as json_file:
-            json.dump(x, json_file)
+            ujson.dump(x, json_file)
 
 
 """
@@ -190,7 +190,7 @@ View the team contained in the json.
 def team_view():
     with open(r'C:\Users\brada\OneDrive\Documents\GitHub\pokemon_project\team.json', 'r') as json_file:
         try:
-            y = json.load(json_file)
+            y = ujson.load(json_file)
             pprint.pp(y)
         except Exception:
             print("Your team is empty!")
