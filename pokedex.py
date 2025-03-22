@@ -1,6 +1,6 @@
-import json
-with open(r"C:\Users\Bradl\OneDrive\Documents\GitHub\PokemonProject\dataset.json") as file:
-    mylist = json.load(file)
+import ujson
+with open(r"dataset.json") as file:
+    mylist = ujson.load(file)
 
 import pprint
 
@@ -10,7 +10,7 @@ MENU = ["Search by Name",
         "Select Pokemon for your team",
         "View your team",
         "Clear the Team",
-        "Show all move in Pokedex(Across all pokemon)"
+        # "Show all move in Pokedex(Across all pokemon)"
         ]
 # """
 # For pretty printing the menu with number options
@@ -174,7 +174,7 @@ def add_to_team(match:list):
 Writes a list to a json. The json contians the team.
 """
 def json_write(lst):
-    with open(r'C:\Users\brada\OneDrive\Documents\GitHub\pokemon_project\team.json', 'r') as json_file:
+    with open(r'/team.json', 'r') as json_file:
         try:    
             x = json.load(json_file)
         except (FileNotFoundError, json.JSONDecodeError):
@@ -230,8 +230,8 @@ while True:
             team_view()
         elif choice == 6:
             team_clear()
-        elif choice == 7:
-            move_display(mylist) 
+        # elif choice == 7:
+        #     move_display(mylist) 
         elif choice == 0:
             print("Goodbye!")            
             break
